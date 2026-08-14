@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AJD PBサイト</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1F8C;
+    --navy-deep:#081760;
+    --red:#E2001A;
+    --black:#1A1A1A;
+    --gray:#5C5C5C;
+    --white:#FFFFFF;
+    --line:#D9DCE2;
+    --bg-soft:#F1F3F8;
+    --shadow:0 2px 12px rgba(11,31,140,.07);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--white);
+    color:var(--black);
+    font-family:"Noto Sans JP",sans-serif;
+    line-height:1.7;
+  }
+
+  .brand-bar{
+    height:4px;
+    background:linear-gradient(90deg,var(--navy) 0%,var(--navy) 92%,var(--red) 92%,var(--red) 100%);
+  }
+
+  img{max-width:100%;display:block;}
+
+  a{color:inherit;text-decoration:none;}
+
+  ul{list-style:none;}
+
+  .wrap{
+    max-width:1200px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* ---------- HEADER ---------- */
+
+  .site-header{
+    border-bottom:1px solid var(--line);
+    background:var(--white);
+    box-shadow:var(--shadow);
+    position:relative;
+    z-index:5;
+  }
+
+  .header-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 24px;
+    gap:24px;
+  }
+
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+
+  .brand-logo{
+    height:40px;
+    width:auto;
+  }
+
+  .brand-tag{
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:700;
+    font-size:15px;
+    color:var(--navy);
+    letter-spacing:.04em;
+    border-left:1px solid var(--line);
+    padding-left:14px;
+  }
+
+  .header-right{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+
+  .header-search{
+    display:flex;
+    align-items:stretch;
+    border:1px solid var(--line);
+  }
+
+  .header-search input{
+    border:none;
+    outline:none;
+    padding:8px 12px;
+    width:180px;
+    font-size:13px;
+    font-family:inherit;
+    color:var(--black);
+  }
+
+  .header-search input::placeholder{
+    color:#9AA0AA;
+  }
+
+  .header-search button{
+    flex:none;
+    width:38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--navy);
+    border:none;
+    cursor:pointer;
+  }
+
+  .header-search button:hover{
+    background:var(--navy-deep);
+  }
+
+  .header-search button svg{
+    width:15px;height:15px;
+    stroke:#fff;
+  }
+
+  .header-nav a{
+    font-size:14px;
+    font-weight:700;
+    color:var(--navy);
+    padding:10px 18px;
+    border:1px solid var(--navy);
+    white-space:nowrap;
+  }
+
+  .header-nav a:hover{
+    background:var(--navy);
+    color:#fff;
+  }
+
+  /* ---------- SEARCH ---------- */
+
+  .search-area{
+    padding:0 0 48px;
+  }
+
+  .search-box{
+    background:var(--white);
+    border:1px solid var(--line);
+    box-shadow:var(--shadow);
+    padding:24px;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:flex-end;
+    gap:20px;
+  }
+
+  .search-row{
+    flex:1 1 320px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+
+  .search-label{
+    font-size:13px;
+    font-weight:700;
+    color:var(--navy);
+  }
+
+  .search-field{
+    display:flex;
+    align-items:stretch;
+    border:1px solid var(--line);
+  }
+
+  .search-field input{
+    flex:1;
+    border:none;
+    outline:none;
+    padding:12px 14px;
+    font-size:14px;
+    font-family:inherit;
+    color:var(--black);
+  }
+
+  .search-field input::placeholder{
+    color:#9AA0AA;
+  }
+
+  .camera-btn{
+    flex:none;
+    width:46px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--bg-soft);
+    border:none;
+    border-left:1px solid var(--line);
+    cursor:pointer;
+  }
+
+  .camera-btn svg{width:22px;height:22px;stroke:var(--navy);}
+
+  .search-submit{
+    flex:none;
+    height:46px;
+    padding:0 30px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-deep) 100%);
+    color:#fff;
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:700;
+    font-size:15px;
+    border:none;
+    cursor:pointer;
+    box-shadow:0 6px 14px -4px rgba(11,31,140,.45);
+  }
+
+  .search-submit svg{width:16px;height:16px;stroke:#fff;flex:none;}
+
+  .search-submit:hover{background:var(--navy-deep);}
+
+  /* ---------- HIGHLIGHTS ---------- */
+
+  .highlight-band{
+    background:
+      radial-gradient(circle at 12% 8%, rgba(11,31,140,.06), transparent 40%),
+      radial-gradient(circle at 88% 92%, rgba(226,0,26,.05), transparent 40%),
+      var(--bg-soft);
+    padding-top:40px;
+  }
+
+  .highlights{
+    padding:0 0 40px;
+  }
+
+  .highlights-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+  }
+
+  .panel{
+    position:relative;
+    background:var(--white);
+    border:1px solid var(--line);
+    border-top:3px solid var(--navy);
+    box-shadow:var(--shadow);
+    padding:28px;
+    overflow:hidden;
+  }
+
+  .panel.pickup-panel{
+    border-top-color:var(--red);
+  }
+
+  .panel::before{
+    content:attr(data-mark);
+    position:absolute;
+    top:-14px;
+    right:-4px;
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:900;
+    font-size:68px;
+    letter-spacing:.02em;
+    color:rgba(11,31,140,.05);
+    white-space:nowrap;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .panel.pickup-panel::before{
+    color:rgba(226,0,26,.05);
+  }
+
+  .panel-head,
+  .slider,
+  .pickup-list{
+    position:relative;
+    z-index:1;
+  }
+
+  .panel-head{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-bottom:18px;
+  }
+
+  .panel-head h2{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:900;
+    font-size:20px;
+    color:var(--black);
+  }
+
+  .panel-head h2::before{
+    content:"";
+    width:6px;
+    height:20px;
+    background:var(--navy);
+    flex:none;
+  }
+
+  .pickup-panel .panel-head h2::before{
+    background:var(--red);
+  }
+
+  .panel-head p{
+    font-size:13px;
+    color:var(--gray);
+  }
+
+  /* slider */
+
+  .slider{
+    position:relative;
+  }
+
+  .slider-stage{
+    position:relative;
+    max-width:360px;
+    margin:0 auto;
+  }
+
+  .slider-image{
+    position:relative;
+    aspect-ratio:1/1;
+    background:var(--white);
+    border:1px solid var(--line);
+    box-shadow:0 0 0 6px #fff, 0 0 0 7px var(--line), var(--shadow);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+
+  .slider-image img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    padding:24px;
+  }
+
+  .slider-image .frame-hint{
+    font-size:13px;
+    color:var(--gray);
+  }
+
+  .slider-arrow{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:36px;height:36px;
+    border-radius:50%;
+    background:#fff;
+    border:1px solid var(--line);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:18px;
+    color:var(--navy);
+    cursor:pointer;
+    z-index:2;
+  }
+
+  .slider-arrow.prev{left:-18px;}
+  .slider-arrow.next{right:-18px;}
+
+  .slider-caption{
+    padding-top:16px;
+  }
+
+  .slider-meta{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:10px;
+  }
+
+  .slider-date{
+    font-size:12px;
+    color:var(--gray);
+  }
+
+  .slider-tag{
+    font-size:12px;
+    font-weight:700;
+    background:var(--bg-soft);
+    color:var(--navy);
+    padding:4px 12px;
+    border-radius:999px;
+  }
+
+  .slider-title{
+    font-size:16px;
+    font-weight:700;
+    line-height:1.6;
+  }
+
+  .slider-dots{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin-top:16px;
+  }
+
+  .slider-dots .dot{
+    width:8px;height:8px;
+    border-radius:50%;
+    background:var(--line);
+    cursor:pointer;
+  }
+
+  .slider-dots .dot.active{
+    background:var(--navy);
+  }
+
+  /* pickup */
+
+  .pickup-list{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:14px;
+  }
+
+  .pickup-card{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    border:1px solid var(--line);
+    background:var(--white);
+    padding:10px;
+    transition:box-shadow .15s ease, transform .15s ease;
+  }
+
+  .pickup-card:hover{
+    box-shadow:0 8px 20px rgba(11,31,140,.14);
+    transform:translateY(-2px);
+  }
+
+  .pickup-image{
+    position:relative;
+    aspect-ratio:1/1;
+    border:1px solid var(--line);
+    background:var(--white);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+
+  .pickup-image img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    padding:12px;
+  }
+
+  .pickup-ribbon{
+    position:absolute;
+    top:8px;
+    left:-2px;
+    background:var(--red);
+    color:#fff;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:.06em;
+    padding:3px 10px 3px 10px;
+    box-shadow:1px 2px 0 rgba(0,0,0,.1);
+    z-index:2;
+  }
+
+  .pickup-ribbon::before{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-5px;
+    border-width:5px 5px 0 0;
+    border-style:solid;
+    border-color:#8f0011 transparent transparent transparent;
+  }
+
+  .pickup-body{
+    padding:12px 4px 4px;
+  }
+
+  .pickup-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:10.5px;
+    font-weight:700;
+    background:var(--bg-soft);
+    color:var(--navy);
+    padding:4px 10px;
+    margin-bottom:8px;
+  }
+
+  .pickup-badge::before{
+    content:"";
+    width:5px;height:5px;
+    background:var(--navy);
+    flex:none;
+  }
+
+  .pickup-body h3{
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-size:13.5px;
+    font-weight:900;
+    line-height:1.5;
+  }
+
+  .pickup-sub{
+    margin-top:8px;
+    font-size:11px;
+    font-weight:700;
+    color:var(--black);
+  }
+
+  .pickup-qty{
+    margin-top:4px;
+    font-size:11px;
+    color:var(--gray);
+  }
+
+  /* ---------- CATEGORIES ---------- */
+
+  .categories{
+    padding:64px 0;
+  }
+
+  .categories > .wrap > h2{
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:900;
+    font-size:24px;
+    text-align:center;
+    margin-bottom:36px;
+    position:relative;
+    padding-bottom:16px;
+  }
+
+  .categories > .wrap > h2::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:0;
+    transform:translateX(-50%);
+    width:48px;
+    height:3px;
+    background:var(--navy);
+  }
+
+  .category-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+  }
+
+  .category-card{
+    border:1px solid var(--line);
+    box-shadow:var(--shadow);
+    transition:box-shadow .15s ease, transform .15s ease;
+  }
+
+  .category-card:hover{
+    box-shadow:0 6px 18px rgba(11,31,140,.12);
+    transform:translateY(-2px);
+  }
+
+  .category-card h3{
+    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-deep) 100%);
+  }
+
+  .category-card h3 a{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:16px 18px;
+    color:#fff;
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:700;
+    font-size:15px;
+  }
+
+  .category-card h3 a svg{
+    width:20px;height:20px;
+    stroke:#fff;
+    flex:none;
+  }
+
+  .category-card ul{
+    padding:16px 18px;
+  }
+
+  .category-card li + li{
+    margin-top:12px;
+    padding-top:12px;
+    border-top:1px solid var(--line);
+  }
+
+  .category-card li a{
+    display:block;
+    font-size:13px;
+    color:var(--gray);
+    line-height:1.7;
+  }
+
+  .category-card li a:hover{
+    color:var(--navy);
+  }
+
+  .category-card li a strong{
+    display:block;
+    font-size:14px;
+    font-weight:700;
+    color:var(--black);
+    margin-bottom:2px;
+  }
+
+  /* ---------- FOOTER ---------- */
+
+  footer{
+    background:var(--navy);
+    color:#DCE3EE;
+    padding:36px 0;
+    text-align:center;
+    font-size:13px;
+  }
+
+  footer strong{
+    display:block;
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-size:16px;
+    margin-bottom:8px;
+    color:#fff;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+
+  @media (max-width:960px){
+    .highlights-grid{grid-template-columns:1fr;}
+    .category-grid{grid-template-columns:repeat(2,1fr);}
+  }
+
+  @media (max-width:640px){
+    .header-inner{flex-direction:column;align-items:flex-start;gap:14px;}
+    .header-right{width:100%;justify-content:space-between;}
+    .header-search{flex:1;}
+    .header-search input{width:auto;flex:1;}
+    .category-grid{grid-template-columns:1fr;}
+    .pickup-list{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="brand-bar"></div>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="ajd-top.html">
+      <img class="brand-logo" src="https://prtimes.jp/i/67687/5/resize/d67687-5-564216-5.jpg" alt="AJD">
+      <span class="brand-tag">毎日に、ちゃんといいものを。オールジャパンドラッグのプライベートブランド</span>
+    </a>
+    <div class="header-right">
+      <form class="header-search" onsubmit="return false;">
+        <input type="text" placeholder="キーワード検索">
+        <button type="submit" aria-label="検索">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="7"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </button>
+      </form>
+      <nav class="header-nav">
+        <a href="#">AJDについて</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<div class="highlight-band">
+
+<section class="highlights">
+  <div class="wrap highlights-grid">
+
+    <div class="panel news-panel" data-mark="NEWS">
+      <div class="panel-head">
+        <h2>新商品情報</h2>
+        <p>新発売の商品をお届け！</p>
+      </div>
+
+      <div class="slider">
+        <div class="slider-stage">
+          <button class="slider-arrow prev" aria-label="前へ" onclick="moveSlide(-1)">‹</button>
+          <div class="slider-image">
+            <img src="img/image-1786602664559.png" alt="新商品パッケージ">
+          </div>
+          <button class="slider-arrow next" aria-label="次へ" onclick="moveSlide(1)">›</button>
+        </div>
+
+        <div class="slider-caption">
+          <div class="slider-meta">
+            <span class="slider-date" id="slideDate">2026/04/10</span>
+            <span class="slider-tag" id="slideTag">商品紹介</span>
+          </div>
+          <p class="slider-title" id="slideTitle">ふわふわ弾力泡の洗顔フォーム</p>
+			          <p id="slideTitle">しっとりふんわり泡洗顔 ふわふわ しっとり 泡 ヒアルロン酸（保湿成分）コラーゲン（保湿成分）配合 ふんわり弾力泡でうるおいたっぷり泡洗顔 ふんわり弾力のある泡がうるおい残して洗い上げます。</p>
+        </div>
+
+        <div class="slider-dots" id="sliderDots">
+          <span class="dot active" onclick="goToSlide(0)"></span>
+          <span class="dot" onclick="goToSlide(1)"></span>
+          <span class="dot" onclick="goToSlide(2)"></span>
+          <span class="dot" onclick="goToSlide(3)"></span>
+          <span class="dot" onclick="goToSlide(4)"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel pickup-panel" data-mark="PICK UP">
+      <div class="panel-head">
+        <h2>ピックアップ</h2>
+        <p>注目の商品をご紹介</p>
+      </div>
+
+      <div class="pickup-list">
+        <div class="pickup-card">
+          <div class="pickup-image">
+            <span class="pickup-ribbon">PICK UP</span>
+            <img src="img/image-1786602664559.png" alt="やさしい効き目の風邪薬">
+          </div>
+          <div class="pickup-body">
+            <span class="pickup-badge">医薬品</span>
+            <h3>モリピン内服液</h3>
+            <p class="pickup-sub">1瓶（30mL）にカフェイン200mg配合＊ ＊コーヒー...</p>
+            <p class="pickup-qty">30mL×2本</p>
+          </div>
+        </div>
+
+        <div class="pickup-card">
+          <div class="pickup-image">
+            <span class="pickup-ribbon">PICK UP</span>
+            <img src="img/image-1786602664559.png" alt="うるおいなめらか 化粧水">
+          </div>
+          <div class="pickup-body">
+            <span class="pickup-badge">医薬品</span>
+            <h3>ケイヒ末［顆粒］ＧＳ</h3>
+            <p class="pickup-sub">食後血糖の上昇抑制 サプリメントではなく効果効能...</p>
+            <p class="pickup-qty">30包（10日分）</p>
+          </div>
+        </div>
+
+        <div class="pickup-card">
+          <div class="pickup-image">
+            <span class="pickup-ribbon">PICK UP</span>
+            <img src="img/image-1786602664559.png" alt="低刺激 薬用ハンドソープ">
+          </div>
+          <div class="pickup-body">
+            <span class="pickup-badge">医薬品</span>
+            <h3>ヒアルロン酸目薬ＴＥＩＫＡ</h3>
+            <p class="pickup-sub">ヒアルロン酸目薬TEIKAは、「目...</p>
+            <p class="pickup-qty">5mL×2本</p>
+          </div>
+        </div>
+
+        <div class="pickup-card">
+          <div class="pickup-image">
+            <span class="pickup-ribbon">PICK UP</span>
+            <img src="img/image-1786602664559.png" alt="毎日飲みたい 野菜ジュース">
+          </div>
+          <div class="pickup-body">
+            <span class="pickup-badge">医療衛材</span>
+            <h3>長時間クールアイスまくら 一晩ひんやりタイプ</h3>
+            <p class="pickup-sub">発熱などの寝苦...</p>
+            <p class="pickup-qty">1個</p>
+          </div>
+        </div>
+
+        <div class="pickup-card">
+          <div class="pickup-image">
+            <span class="pickup-ribbon">PICK UP</span>
+            <img src="img/image-1786602664559.png" alt="続けやすい マルチビタミン">
+          </div>
+          <div class="pickup-body">
+            <span class="pickup-badge">食品</span>
+            <h3>アイススラリー</h3>
+            <p class="pickup-sub">104kcal 凍らせて飲む 素早く冷却・塩分補給 スポーツドリンクタイプ</p>
+            <p class="pickup-qty">100g</p>
+          </div>
+        </div>
+
+        <div class="pickup-card">
+          <div class="pickup-image">
+            <span class="pickup-ribbon">PICK UP</span>
+            <img src="img/image-1786602664559.png" alt="さらさら仕上がり トリートメント">
+          </div>
+          <div class="pickup-body">
+            <span class="pickup-badge">化粧品</span>
+            <h3>さらさら仕上がり トリートメント</h3>
+            <p class="pickup-sub">Silky Smooth Treatment</p>
+            <p class="pickup-qty">400g</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="search-area">
+  <div class="wrap">
+    <form class="search-box" onsubmit="return false;">
+      <div class="search-row">
+        <span class="search-label">バーコード検索</span>
+        <div class="search-field">
+          <input type="text" placeholder="バーコード番号を入力">
+          <button type="button" class="camera-btn" aria-label="カメラでバーコードを読み取る" onclick="alert('カメラを起動します（実装予定）');">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/>
+              <circle cx="12" cy="13.5" r="3.3"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="search-row">
+        <span class="search-label">キーワード検索</span>
+        <div class="search-field">
+          <input type="text" placeholder="商品名・カテゴリなどを入力">
+        </div>
+      </div>
+      <button type="submit" class="search-submit">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        検索する
+      </button>
+    </form>
+  </div>
+</section>
+
+</div>
+
+<section class="categories">
+  <div class="wrap">
+    <h2>カテゴリーから探す</h2>
+    <div class="category-grid">
+
+      <div class="category-card">
+        <h3><a href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          医薬品（OTC医薬品・調剤）
+        </a></h3>
+        <ul>
+          <li><a href="#"><strong>内服薬・外用薬</strong>風邪薬、胃腸薬、鎮痛剤、目薬</a></li>
+          <li><a href="#"><strong>医療品・調剤</strong>処方箋に基づく調剤薬品</a></li>
+          <li><a href="#"><strong>衛生材料</strong>絆創膏、マスク、包帯</a></li>
+        </ul>
+      </div>
+
+      <div class="category-card">
+        <h3><a href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11Z"/></svg>
+          化粧品（コスメ・スキンケア）
+        </a></h3>
+        <ul>
+          <li><a href="#"><strong>基礎化粧品</strong>化粧水、乳液、美容液、クレンジング</a></li>
+          <li><a href="#"><strong>メイクアップ</strong>口紅、ファンデーション、アイライナー</a></li>
+          <li><a href="#"><strong>ヘアケア</strong>シャンプー、トリートメント、スタイリング剤</a></li>
+        </ul>
+      </div>
+
+      <div class="category-card">
+        <h3><a href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11 12 4l8 7"/><path d="M6 10v9h12v-9"/></svg>
+          日用雑貨・トイレタリー
+        </a></h3>
+        <ul>
+          <li><a href="#"><strong>家庭用消耗品</strong>ティッシュペーパー、トイレットペーパー、洗剤</a></li>
+          <li><a href="#"><strong>オーラルケア</strong>歯ブラシ、歯磨き粉、マウスウォッシュ</a></li>
+          <li><a href="#"><strong>芳香・消臭剤</strong>置き型消臭剤、防虫剤</a></li>
+        </ul>
+      </div>
+
+      <div class="category-card">
+        <h3><a href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h16a8 8 0 0 1-16 0Z"/><path d="M8 10V5a4 4 0 0 1 8 0v5"/></svg>
+          食品・飲料
+        </a></h3>
+        <ul>
+          <li><a href="#"><strong>加工食品</strong>レトルト食品、インスタント麺、調味料</a></li>
+          <li><a href="#"><strong>日配品・飲料</strong>牛乳、パン、ペットボトル飲料、お菓子・スナック</a></li>
+        </ul>
+      </div>
+
+      <div class="category-card">
+        <h3><a href="#">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21c0-9 5-15 15-15 0 10-6 15-15 15Z"/><path d="M5 21c3-3 6-6 11-11"/></svg>
+          健康食品・サプリメント
+        </a></h3>
+        <ul>
+          <li><a href="#"><strong>サプリメント</strong>ビタミン剤、栄養補助食品</a></li>
+          <li><a href="#"><strong>健康ドリンク</strong>栄養ドリンク、健康茶、ダイエット食品</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>AJD PBサイト</strong>
+  &copy; AJD Co., Ltd.
+</footer>
+
+<script>
+  const slides = [
+    {date:'2024/04/10', tag:'商品紹介', title:'〈ボディタオル〉はお悩み＆素材別で選びましょう！'},
+    {date:'2024/03/22', tag:'開発秘話', title:'新シリーズ〈もちふわ泡〉開発ストーリー'},
+    {date:'2024/03/05', tag:'コラム',   title:'正しい洗顔で叶える、うるおい肌ケア'},
+    {date:'2024/02/18', tag:'お知らせ', title:'AJD PBサイトがリニューアルしました'},
+    {date:'2024/02/01', tag:'商品紹介', title:'季節の変わり目にオススメの日用品特集'}
+  ];
+  let current = 0;
+
+  function render(){
+    const s = slides[current];
+    document.getElementById('slideDate').textContent = s.date;
+    document.getElementById('slideTag').textContent = s.tag;
+    document.getElementById('slideTitle').textContent = s.title;
+    document.querySelectorAll('#sliderDots .dot').forEach((d,i)=>{
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  function moveSlide(delta){
+    current = (current + delta + slides.length) % slides.length;
+    render();
+  }
+
+  function goToSlide(i){
+    current = i;
+    render();
+  }
+</script>
+
+</body>
+</html>
