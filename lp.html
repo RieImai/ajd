@@ -34,7 +34,7 @@
   img,video{max-width:100%;display:block;}
 
   .wrap{
-    max-width:1080px;
+    max-width:1200px;
     margin:0 auto;
     padding:0 24px;
   }
@@ -344,6 +344,10 @@
     border:none;
   }
 
+  .media-frame.image-cut.s{
+    flex-direction:column;
+  }
+
   .media-frame.image-cut img{
     width:100%;
     height:100%;
@@ -374,7 +378,7 @@
     color:#fff;
     font-family:"Zen Maru Gothic",sans-serif;
     font-weight:700;
-    font-size:15px;
+    font-size:18px;
     letter-spacing:.02em;
   }
 
@@ -382,6 +386,17 @@
   .media-frame .catch.pos-tr{top:16px;right:16px;}
   .media-frame .catch.pos-bl{bottom:16px;left:16px;}
   .media-frame .catch.pos-br{bottom:16px;right:16px;}
+  .media-frame .catch.pos-center{
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    text-align:center;
+  }
+
+  .media-frame .catch.cap-top{
+    position:static;
+    text-align:center;
+  }
 
   .media-frame .catch.color-blue{background:rgba(65,105,225,.5);}
   .media-frame .catch.color-magenta{background:rgba(255,0,255,.5);}
@@ -568,6 +583,214 @@
     color:var(--gray);
   }
 
+  /* ---------- STORES ---------- */
+
+  .stores{
+    padding:72px 0;
+    border-top:1px solid var(--line);
+  }
+
+  .stores h2{
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:900;
+    font-size:20px;
+    color:var(--black);
+    margin-top:14px;
+  }
+
+  .stores .lead-text{
+    margin-top:14px;
+    max-width:60ch;
+    color:var(--gray);
+    font-size:14px;
+  }
+
+  .store-stats{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:28px;
+  }
+
+  .store-stat{
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+    padding:14px 22px;
+    border:1px solid var(--line);
+    background:var(--white);
+  }
+
+  .store-stat strong{
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:900;
+    font-size:24px;
+    color:var(--navy);
+  }
+
+  .store-stat span{
+    font-size:12px;
+    color:var(--gray);
+  }
+
+  .region-tabs{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:24px;
+  }
+
+  .region-tab{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:700;
+    font-size:13px;
+    padding:10px 16px;
+    background:var(--white);
+    color:var(--gray);
+    border:1px solid var(--line);
+    cursor:pointer;
+  }
+
+  .region-tab span{
+    font-size:11px;
+    font-weight:700;
+    padding:2px 7px;
+    background:var(--bg-tab, #F0F0F0);
+    color:var(--gray);
+  }
+
+  .region-tab.active{
+    background:var(--navy);
+    border-color:var(--navy);
+    color:#fff;
+  }
+
+  .region-tab.active span{
+    background:rgba(255,255,255,.25);
+    color:#fff;
+  }
+
+  .region-panel{
+    margin-top:28px;
+  }
+
+  .region-panel[hidden]{
+    display:none;
+  }
+
+  .pref-group{
+    border:1px solid var(--line);
+    margin-bottom:12px;
+  }
+
+  .pref-group:last-child{
+    margin-bottom:0;
+  }
+
+  .pref-toggle{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:14px 18px;
+    background:var(--white);
+    border:none;
+    cursor:pointer;
+    text-align:left;
+    font-family:inherit;
+  }
+
+  .pref-toggle-left{
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+
+  .pref-name-text{
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:700;
+    font-size:15px;
+    color:var(--black);
+  }
+
+  .pref-count{
+    font-size:11px;
+    font-weight:700;
+    color:#fff;
+    background:var(--navy);
+    padding:3px 9px;
+  }
+
+  .pref-toggle .pref-caret{
+    font-size:18px;
+    font-weight:700;
+    line-height:1;
+    color:var(--navy);
+    flex:none;
+    transition:transform .15s ease;
+  }
+
+  .pref-toggle[aria-expanded="true"]{
+    border-bottom:1px solid var(--line);
+  }
+
+  .pref-toggle[aria-expanded="true"] .pref-caret{
+    transform:rotate(45deg);
+  }
+
+  .pref-body{
+    padding:16px 18px 18px;
+  }
+
+  .pref-body[hidden]{
+    display:none;
+  }
+
+  .store-list{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(210px, 1fr));
+    gap:10px;
+  }
+
+  .store-card{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    padding:10px 12px;
+    border:1px solid var(--line);
+    background:var(--white);
+  }
+
+  .store-icon{
+    width:16px;height:16px;
+    margin-top:2px;
+    color:var(--red);
+    flex:none;
+  }
+
+  .store-card-text{
+    display:flex;
+    flex-direction:column;
+    gap:3px;
+    min-width:0;
+  }
+
+  .store-card-name{
+    font-size:13px;
+    font-weight:700;
+    color:var(--black);
+    line-height:1.4;
+  }
+
+  .store-card-addr{
+    font-size:11px;
+    color:var(--gray);
+  }
+
   /* ---------- FOOTER ---------- */
 
   footer{
@@ -619,7 +842,7 @@
 <header class="site-header">
   <div class="wrap header-inner">
     <a class="brand" href="ajd-top.html">
-      <img class="brand-logo" src="https://prtimes.jp/i/67687/5/resize/d67687-5-564216-5.jpg" alt="AJD">
+      <img class="brand-logo" src="img/images.png" alt="AJD">
       <span class="brand-tag">毎日に、ちゃんといいものを。オールジャパンドラッグのプライベートブランド</span>
     </a>
     <nav class="header-nav">
@@ -643,7 +866,7 @@
       <span class="name-line">弾力泡の<br>洗顔フォーム</span>
       <span class="cap">160g</span>
     </div>-->
-    <img src="img/image-1786602664559.png" width="" height="" alt="パッケージ画像"/>
+    <img src="img/image-1786602664559.png" alt="パッケージ画像"/>
 
     <div class="hero-copy">
       <!--<span class="eyebrow-badge">しっとりふんわり泡洗顔</span>-->
@@ -673,8 +896,8 @@
     </div>
 
     <div class="media-frame image-cut s">
+      <span class="catch cap-top color-blue">洗浄力の秘密はふわふわもっちり弾力泡。</span><span class="catch cap-top color-blue">泡立ちが良く、しかも泡が長持ち。ずっと洗っていたいくらいの心地よさ</span>
       <img src="img/AdobeStock_1935112003.jpeg" alt="使用イメージ">
-      <span class="catch pos-bl color-blue">洗浄力の秘密はふわふわもっちり弾力泡。泡立ちが良く、しかも泡が長持ち。ずっと洗っていたいくらいの心地よさ</span>
     </div>
 
     <div class="media-frame image-cut">
@@ -748,10 +971,491 @@
   </div>
 </section>
 
+<svg style="display:none" aria-hidden="true">
+  <symbol id="icon-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 21s7-7.5 7-12a7 7 0 0 0-14 0c0 4.5 7 12 7 12Z"/>
+    <circle cx="12" cy="9" r="2.5"/>
+  </symbol>
+</svg>
+
+<section class="stores">
+  <div class="wrap">
+    <span class="eyebrow"><h2 style="margin-top:0px;">取り扱いドラッグストア一覧</h2></span>
+    <p class="lead-text">次の AJD（オールジャパンドラッグ）加盟店で取り扱っています。地域タブを選ぶと、取り扱いドラッグストア一覧が開きます。</p>
+
+    <div class="store-stats">
+      <div class="store-stat"><strong>7</strong><span>地域ブロック</span></div>
+      <div class="store-stat"><strong>31</strong><span>都道府県</span></div>
+      <div class="store-stat"><strong>89</strong><span>加盟店舗</span></div>
+    </div>
+
+    <div class="region-tabs" role="tablist">
+      <button type="button" class="region-tab active" data-region="1">北海道<span>3</span></button>
+      <button type="button" class="region-tab" data-region="2">東北<span>11</span></button>
+      <button type="button" class="region-tab" data-region="3">関東・甲信越<span>31</span></button>
+      <button type="button" class="region-tab" data-region="4">中部・北陸<span>6</span></button>
+      <button type="button" class="region-tab" data-region="5">近畿<span>20</span></button>
+      <button type="button" class="region-tab" data-region="6">中四国<span>3</span></button>
+      <button type="button" class="region-tab" data-region="7">九州・沖縄<span>15</span></button>
+    </div>
+
+    <div class="region-panel" data-region-panel="1">
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="true">
+          <span class="pref-toggle-left"><span class="pref-name-text">北海道</span><span class="pref-count">3件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body">
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）スギハラ</span><span class="store-card-addr">千歳市千代田町</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）阿部薬局</span><span class="store-card-addr">根室市緑町</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">生活協同組合コープさっぽろ</span><span class="store-card-addr">札幌市西区</span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="region-panel" data-region-panel="2" hidden>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="true">
+          <span class="pref-toggle-left"><span class="pref-name-text">青森県</span><span class="pref-count">3件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body">
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）菊池薬店</span><span class="store-card-addr">弘前市土手町</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）沖舘薬局</span><span class="store-card-addr">青森市柳川</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）町田アンド町田商会</span><span class="store-card-addr">弘前市境関</span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="true">
+          <span class="pref-toggle-left"><span class="pref-name-text">宮城県</span><span class="pref-count">3件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body" hidden>
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（有）星薬局</span><span class="store-card-addr">石巻市あけぼの</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（有）鈴木薬品商事</span><span class="store-card-addr">登米市迫町</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）ヨネキ十字堂</span><span class="store-card-addr">大崎市古川大宮</span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="false">
+          <span class="pref-toggle-left"><span class="pref-name-text">秋田県</span><span class="pref-count">2件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body" hidden>
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）池田薬局</span><span class="store-card-addr">由利本荘市川口</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）アマノ</span><span class="store-card-addr">男鹿市船越</span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="false">
+          <span class="pref-toggle-left"><span class="pref-name-text">山形県</span><span class="pref-count">2件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body" hidden>
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）ヤマザワ薬品</span><span class="store-card-addr">山形市あこや町</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）柴崎薬局</span><span class="store-card-addr">尾花沢市中町</span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="false">
+          <span class="pref-toggle-left"><span class="pref-name-text">福島県</span><span class="pref-count">1件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body" hidden>
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）くすりのマルト</span><span class="store-card-addr">いわき市勿来町</span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="region-panel" data-region-panel="3" hidden>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="true">
+          <span class="pref-toggle-left"><span class="pref-name-text">茨城県</span><span class="pref-count">1件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body">
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）久保田薬局</span><span class="store-card-addr">石岡市石岡</span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="false">
+          <span class="pref-toggle-left"><span class="pref-name-text">栃木県</span><span class="pref-count">1件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body" hidden>
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）カワチ薬品</span><span class="store-card-addr">小山市大字卒島</span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="false">
+          <span class="pref-toggle-left"><span class="pref-name-text">群馬県</span><span class="pref-count">1件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body" hidden>
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）クスリのマルエ</span><span class="store-card-addr">前橋市樋越町</span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="false">
+          <span class="pref-toggle-left"><span class="pref-name-text">埼玉県</span><span class="pref-count">4件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body" hidden>
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）遠藤薬局</span><span class="store-card-addr">久喜市久喜東</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）トミオカ薬局</span><span class="store-card-addr">熊谷市鎌倉町</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）エフケイ</span><span class="store-card-addr">富士見市羽沢</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）ウィーズ</span><span class="store-card-addr">北葛飾郡松伏町</span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="false">
+          <span class="pref-toggle-left"><span class="pref-name-text">千葉県</span><span class="pref-count">4件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body" hidden>
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）千葉薬品</span><span class="store-card-addr">千葉市中央区</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）星野薬局</span><span class="store-card-addr">市原市五井</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）カネマタ</span><span class="store-card-addr">船橋市海神</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）エービン</span><span class="store-card-addr">成田市東和田</span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="false">
+          <span class="pref-toggle-left"><span class="pref-name-text">東京都</span><span class="pref-count">12件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body" hidden>
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）龍生堂本店</span><span class="store-card-addr">新宿区百人町</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）ニシザワ</span><span class="store-card-addr">千代田区内神田</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）サンドラッグ</span><span class="store-card-addr">府中市若松町</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）フタバ薬局</span><span class="store-card-addr">目黒区中央町</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">みづほ商事（株）</span><span class="store-card-addr">府中市宮町</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（有）野方薬局</span><span class="store-card-addr">中野区野方</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）キク薬局</span><span class="store-card-addr">大田区山王</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）くすりのダイイチ</span><span class="store-card-addr">西東京市東町</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">ユニバーサルドラッグ（株）</span><span class="store-card-addr">北区中里</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）なの花東日本</span><span class="store-card-addr">港区虎ノ門</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）ミサワ薬局</span><span class="store-card-addr">葛飾区青戸</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">総合メディカル（株）</span><span class="store-card-addr">千代田区大手町</span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="false">
+          <span class="pref-toggle-left"><span class="pref-name-text">神奈川県</span><span class="pref-count">5件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body" hidden>
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）湘南薬品</span><span class="store-card-addr">藤沢市鵠沼石上</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）オダギリ</span><span class="store-card-addr">大和市大和東</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）カメガヤ</span><span class="store-card-addr">横浜市港北区</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）クリエイトエス・ディー</span><span class="store-card-addr">横浜市青葉区</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）わかば</span><span class="store-card-addr">横浜市港北区</span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="false">
+          <span class="pref-toggle-left"><span class="pref-name-text">山梨県</span><span class="pref-count">1件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body" hidden>
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）クスリのサンロード</span><span class="store-card-addr">甲府市後屋町</span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="false">
+          <span class="pref-toggle-left"><span class="pref-name-text">長野県</span><span class="pref-count">2件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body" hidden>
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）ノリ薬局</span><span class="store-card-addr">上田市蒼久保</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）コスコ</span><span class="store-card-addr">松本市笹部</span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="region-panel" data-region-panel="4" hidden>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="true">
+          <span class="pref-toggle-left"><span class="pref-name-text">福井県</span><span class="pref-count">1件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body">
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（有）カドノ薬局</span><span class="store-card-addr">敦賀市中央町</span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="false">
+          <span class="pref-toggle-left"><span class="pref-name-text">岐阜県</span><span class="pref-count">1件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body" hidden>
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（有）ラブ</span><span class="store-card-addr">大垣市高屋町</span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="false">
+          <span class="pref-toggle-left"><span class="pref-name-text">静岡県</span><span class="pref-count">2件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body" hidden>
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）フジイチ薬局</span><span class="store-card-addr">富士市吉原</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）杏林堂薬局</span><span class="store-card-addr">浜松市中区</span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="false">
+          <span class="pref-toggle-left"><span class="pref-name-text">愛知県</span><span class="pref-count">2件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body" hidden>
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）スギヤマ薬品</span><span class="store-card-addr">名古屋市千種区</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）ヤナセ薬局</span><span class="store-card-addr">豊田市御幸本町</span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="region-panel" data-region-panel="5" hidden>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="true">
+          <span class="pref-toggle-left"><span class="pref-name-text">京都府</span><span class="pref-count">4件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body">
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">光（株）</span><span class="store-card-addr">京都市上京区</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）平安薬業</span><span class="store-card-addr">京都市山科区</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">内山薬品（株）</span><span class="store-card-addr">舞鶴市溝尻</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）フジタ薬局</span><span class="store-card-addr">京都市伏見区</span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="false">
+          <span class="pref-toggle-left"><span class="pref-name-text">大阪府</span><span class="pref-count">8件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body" hidden>
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）阪神薬局</span><span class="store-card-addr">大阪市北区</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）ケアーズ</span><span class="store-card-addr">高槻市栄町</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）テイコク製薬社</span><span class="store-card-addr">大阪市港区</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（有）岡崎薬局</span><span class="store-card-addr">大阪市平野区</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）キリン堂</span><span class="store-card-addr">大阪市淀川区</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）アカカベ</span><span class="store-card-addr">大東市明美の里町</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）若井薬品</span><span class="store-card-addr">門真市野里町</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）ｍｉｋ　ｊａｐａｎ</span><span class="store-card-addr">大阪市中央区</span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="false">
+          <span class="pref-toggle-left"><span class="pref-name-text">兵庫県</span><span class="pref-count">4件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body" hidden>
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">クレハ薬品商事（株）</span><span class="store-card-addr">尼崎市潮江</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）センタードラッグ</span><span class="store-card-addr">神戸市垂水区</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）ニシイチドラッグ</span><span class="store-card-addr">尼崎市尾浜町</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）ナガタ薬品</span><span class="store-card-addr">神戸市須磨区</span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="false">
+          <span class="pref-toggle-left"><span class="pref-name-text">奈良県</span><span class="pref-count">2件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body" hidden>
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）奈良ユーヤク</span><span class="store-card-addr">橿原市山之坊町</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）ファーマシー木のうた</span><span class="store-card-addr">奈良市三条町</span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="false">
+          <span class="pref-toggle-left"><span class="pref-name-text">和歌山県</span><span class="pref-count">2件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body" hidden>
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）和歌山ドラッグチェーン</span><span class="store-card-addr">和歌山市新在家</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">エバグリーン廣甚（株）</span><span class="store-card-addr">有田郡湯浅町</span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="region-panel" data-region-panel="6" hidden>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="true">
+          <span class="pref-toggle-left"><span class="pref-name-text">徳島県</span><span class="pref-count">1件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body">
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（有）杉山薬局</span><span class="store-card-addr">名西郡石井町</span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="false">
+          <span class="pref-toggle-left"><span class="pref-name-text">高知県</span><span class="pref-count">2件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body" hidden>
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）エースワン</span><span class="store-card-addr">高知市薊野南町</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（有）かもめ薬局</span><span class="store-card-addr">高知市旭町</span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="region-panel" data-region-panel="7" hidden>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="true">
+          <span class="pref-toggle-left"><span class="pref-name-text">福岡県</span><span class="pref-count">5件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body">
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）サンキュードラッグ</span><span class="store-card-addr">北九州市門司区</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）大賀薬局</span><span class="store-card-addr">福岡市博多区</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）タイヨードー薬局</span><span class="store-card-addr">久留米市東町</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）コスモス薬品</span><span class="store-card-addr">福岡市博多区</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）新生堂薬局</span><span class="store-card-addr">福岡市南区</span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="false">
+          <span class="pref-toggle-left"><span class="pref-name-text">佐賀県</span><span class="pref-count">4件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body" hidden>
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）辻薬店</span><span class="store-card-addr">唐津市刀町</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）武田健康堂</span><span class="store-card-addr">佐賀市水ケ江</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）宮崎薬局</span><span class="store-card-addr">武雄市武雄町</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）ミズ</span><span class="store-card-addr">佐賀市水ケ江</span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="false">
+          <span class="pref-toggle-left"><span class="pref-name-text">熊本県</span><span class="pref-count">3件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body" hidden>
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）同仁堂</span><span class="store-card-addr">熊本市中央区</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）下川薬局</span><span class="store-card-addr">熊本市中央区</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">マルセイドラッグ（株）</span><span class="store-card-addr">熊本市中央区</span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="false">
+          <span class="pref-toggle-left"><span class="pref-name-text">鹿児島県</span><span class="pref-count">1件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body" hidden>
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）キク薬舗</span><span class="store-card-addr">鹿児島市呉服町</span></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="pref-group">
+        <button type="button" class="pref-toggle" aria-expanded="false">
+          <span class="pref-toggle-left"><span class="pref-name-text">沖縄県</span><span class="pref-count">2件</span></span>
+          <span class="pref-caret">+</span>
+        </button>
+        <div class="pref-body" hidden>
+          <div class="store-list">
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">沖縄サンキュウドラッグ協同組合</span><span class="store-card-addr">宜野湾市野嵩</span></span></div>
+            <div class="store-card"><svg class="store-icon"><use href="#icon-pin"/></svg><span class="store-card-text"><span class="store-card-name">（株）ふく薬品</span><span class="store-card-addr">那覇市久茂地</span></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <strong>ふわふわ弾力泡の洗顔フォーム</strong>
   内容量 160g　ヒアルロン酸・コラーゲン（保湿成分）配合
 </footer>
+
+<script>
+  document.querySelectorAll('.region-tab').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.region-tab').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var target = btn.dataset.region;
+      document.querySelectorAll('.region-panel').forEach(function(panel){
+        var isTarget = panel.dataset.regionPanel === target;
+        panel.hidden = !isTarget;
+        if(isTarget){
+          panel.querySelectorAll('.pref-toggle').forEach(function(toggle){
+            toggle.setAttribute('aria-expanded', 'true');
+          });
+          panel.querySelectorAll('.pref-body').forEach(function(body){
+            body.hidden = false;
+          });
+        }
+      });
+    });
+  });
+
+  document.querySelectorAll('.pref-toggle').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var body = btn.parentElement.querySelector('.pref-body');
+      var expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', String(!expanded));
+      body.hidden = expanded;
+    });
+  });
+</script>
 
 </body>
 </html>

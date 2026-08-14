@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>検索結果 | AJD PBサイト</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1F8C;
+    --navy-deep:#081760;
+    --red:#E2001A;
+    --black:#1A1A1A;
+    --gray:#5C5C5C;
+    --white:#FFFFFF;
+    --line:#D9DCE2;
+    --bg-soft:#F1F3F8;
+    --shadow:0 2px 12px rgba(11,31,140,.07);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--white);
+    color:var(--black);
+    font-family:"Noto Sans JP",sans-serif;
+    line-height:1.7;
+  }
+
+  .brand-bar{
+    height:4px;
+    background:linear-gradient(90deg,var(--navy) 0%,var(--navy) 92%,var(--red) 92%,var(--red) 100%);
+  }
+
+  img{max-width:100%;display:block;}
+
+  a{color:inherit;text-decoration:none;}
+
+  ul{list-style:none;}
+
+  .wrap{
+    max-width:1200px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* ---------- HEADER ---------- */
+
+  .site-header{
+    border-bottom:1px solid var(--line);
+    background:var(--white);
+    box-shadow:var(--shadow);
+    position:relative;
+    z-index:5;
+  }
+
+  .header-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 24px;
+    gap:24px;
+  }
+
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+
+  .brand-logo{
+    height:40px;
+    width:auto;
+  }
+
+  .brand-tag{
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:700;
+    font-size:15px;
+    color:var(--navy);
+    letter-spacing:.04em;
+    border-left:1px solid var(--line);
+    padding-left:14px;
+  }
+
+  .header-right{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+
+  .header-search{
+    display:flex;
+    align-items:stretch;
+    border:1px solid var(--line);
+  }
+
+  .header-search input{
+    border:none;
+    outline:none;
+    padding:8px 12px;
+    width:180px;
+    font-size:13px;
+    font-family:inherit;
+    color:var(--black);
+  }
+
+  .header-search input::placeholder{
+    color:#9AA0AA;
+  }
+
+  .header-search button{
+    flex:none;
+    width:38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--navy);
+    border:none;
+    cursor:pointer;
+  }
+
+  .header-search button:hover{
+    background:var(--navy-deep);
+  }
+
+  .header-search button svg{
+    width:15px;height:15px;
+    stroke:#fff;
+  }
+
+  .header-nav a{
+    font-size:14px;
+    font-weight:700;
+    color:var(--navy);
+    padding:10px 18px;
+    border:1px solid var(--navy);
+    white-space:nowrap;
+  }
+
+  .header-nav a:hover{
+    background:var(--navy);
+    color:#fff;
+  }
+
+  /* ---------- RESULTS HEAD ---------- */
+
+  .results-head{
+    background:
+      radial-gradient(circle at 12% 8%, rgba(11,31,140,.06), transparent 40%),
+      radial-gradient(circle at 88% 92%, rgba(226,0,26,.05), transparent 40%),
+      var(--bg-soft);
+    padding:40px 0;
+  }
+
+  .results-eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.08em;
+    color:var(--navy);
+  }
+
+  .results-eyebrow::before{
+    content:"";
+    width:16px;height:16px;
+    background:var(--navy);
+    flex:none;
+  }
+
+  .results-head h1{
+    margin-top:14px;
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:900;
+    font-size:24px;
+    color:var(--black);
+  }
+
+  .results-head h1 span{
+    color:var(--navy);
+  }
+
+  .results-count{
+    margin-top:10px;
+    font-size:13px;
+    color:var(--gray);
+  }
+
+  .results-count strong{
+    color:var(--black);
+    font-size:15px;
+  }
+
+  /* ---------- RESULTS GRID ---------- */
+
+  .results{
+    padding:48px 0 72px;
+  }
+
+  .pickup-list{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+  }
+
+  .pickup-card{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    border:1px solid var(--line);
+    background:var(--white);
+    padding:10px;
+    transition:box-shadow .15s ease, transform .15s ease;
+  }
+
+  .pickup-card:hover{
+    box-shadow:0 8px 20px rgba(11,31,140,.14);
+    transform:translateY(-2px);
+  }
+
+  .pickup-image{
+    position:relative;
+    aspect-ratio:1/1;
+    border:1px solid var(--line);
+    background:var(--white);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+
+  .pickup-image img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    padding:12px;
+  }
+
+  .pickup-ribbon{
+    position:absolute;
+    top:8px;
+    left:-2px;
+    background:var(--red);
+    color:#fff;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:.06em;
+    padding:3px 10px 3px 10px;
+    box-shadow:1px 2px 0 rgba(0,0,0,.1);
+    z-index:2;
+  }
+
+  .pickup-ribbon::before{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-5px;
+    border-width:5px 5px 0 0;
+    border-style:solid;
+    border-color:#8f0011 transparent transparent transparent;
+  }
+
+  .pickup-body{
+    padding:12px 4px 4px;
+  }
+
+  .pickup-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:10.5px;
+    font-weight:700;
+    background:var(--bg-soft);
+    color:var(--navy);
+    padding:4px 10px;
+    margin-bottom:8px;
+  }
+
+  .pickup-badge::before{
+    content:"";
+    width:5px;height:5px;
+    background:var(--navy);
+    flex:none;
+  }
+
+  .pickup-body h3{
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-size:13.5px;
+    font-weight:900;
+    line-height:1.5;
+  }
+
+  .pickup-sub{
+    margin-top:8px;
+    font-size:11px;
+    font-weight:700;
+    color:var(--black);
+  }
+
+  .pickup-qty{
+    margin-top:4px;
+    font-size:11px;
+    color:var(--gray);
+  }
+
+  .no-results{
+    display:none;
+    padding:48px 24px;
+    text-align:center;
+    color:var(--gray);
+    font-size:14px;
+    border:1px solid var(--line);
+  }
+
+  .pagination{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:32px;
+  }
+
+  .pagination button{
+    min-width:38px;
+    height:38px;
+    padding:0 10px;
+    font-size:13px;
+    font-weight:700;
+    font-family:inherit;
+    background:var(--white);
+    color:var(--navy);
+    border:1px solid var(--line);
+    cursor:pointer;
+  }
+
+  .pagination button.active{
+    background:var(--navy);
+    border-color:var(--navy);
+    color:#fff;
+  }
+
+  .pagination button:disabled{
+    color:#B9BDC7;
+    cursor:default;
+  }
+
+  /* ---------- FOOTER ---------- */
+
+  footer{
+    background:var(--navy);
+    color:#DCE3EE;
+    padding:36px 0;
+    text-align:center;
+    font-size:13px;
+  }
+
+  footer strong{
+    display:block;
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-size:16px;
+    margin-bottom:8px;
+    color:#fff;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+
+  @media (max-width:960px){
+    .pickup-list{grid-template-columns:repeat(2,1fr);}
+  }
+
+  @media (max-width:640px){
+    .header-inner{flex-direction:column;align-items:flex-start;gap:14px;}
+    .header-right{width:100%;justify-content:space-between;}
+    .header-search{flex:1;}
+    .header-search input{width:auto;flex:1;}
+    .pickup-list{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="brand-bar"></div>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="ajd-top.html">
+      <img class="brand-logo" src="img/images.png" alt="AJD">
+      <span class="brand-tag">毎日に、ちゃんといいものを。オールジャパンドラッグのプライベートブランド</span>
+    </a>
+    <div class="header-right">
+      <form class="header-search" action="search-results.html" method="get">
+        <input type="text" name="q" placeholder="キーワード検索">
+        <button type="submit" aria-label="検索">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="7"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </button>
+      </form>
+      <nav class="header-nav">
+        <a href="#">AJDについて</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<section class="results-head">
+  <div class="wrap">
+    <span class="results-eyebrow"><h2 style="margin-top:0px;">検索結果</h2></span>
+    <h1 id="resultsTitle">カテゴリーから探す　内服薬・外用薬</h1>
+    <p class="results-count"><strong id="resultsCount">11</strong> 件の商品が見つかりました</p>
+  </div>
+</section>
+
+<section class="results">
+  <div class="wrap">
+    <div class="pickup-list" id="resultsList">
+
+      <a href="lp.html" class="pickup-card">
+        <div class="pickup-image">
+          <!--<span class="pickup-ribbon">PICK UP</span>-->
+          <img src="img/image-1786602664559.png" alt="ふわふわ弾力泡の洗顔フォーム">
+        </div>
+        <div class="pickup-body">
+          <span class="pickup-badge">洗顔料</span>
+          <h3>ふわふわ弾力泡の洗顔フォーム</h3>
+          <p class="pickup-sub">ヒアルロン酸・コラーゲン（保湿成分）配合 ふんわり弾力泡でうるおいたっぷり泡洗顔</p>
+          <p class="pickup-qty">160g</p>
+        </div>
+      </a>
+
+      <a href="lp.html" class="pickup-card">
+        <div class="pickup-image">
+          <!--<span class="pickup-ribbon">PICK UP</span>-->
+          <img src="img/4573674009793_2193013a.jpg" alt="ボールタイプの衣料用洗剤">
+        </div>
+        <div class="pickup-body">
+          <span class="pickup-badge">衣料用洗剤</span>
+          <h3>ボールタイプの衣料用洗剤</h3>
+          <p class="pickup-sub">必要な分だけムダなく洗える、洗濯機にポイっと入れるだけ</p>
+          <p class="pickup-qty">7個入（約7日分）</p>
+        </div>
+      </a>
+
+      <a href="lp.html" class="pickup-card">
+        <div class="pickup-image">
+          <!--<span class="pickup-ribbon">PICK UP</span>-->
+          <img src="img/4513574045026_2114153a.jpg" alt="ビタミンC＋酵素 クレンジングオイル">
+        </div>
+        <div class="pickup-body">
+          <span class="pickup-badge">クレンジングオイル</span>
+          <h3>ビタミンC＋酵素 クレンジングオイル</h3>
+          <p class="pickup-sub">3種のビタミンC誘導体＋3種の酵素配合のクレンジングオイル</p>
+          <p class="pickup-qty">400mL</p>
+        </div>
+      </a>
+
+      <a href="lp.html" class="pickup-card">
+        <div class="pickup-image">
+          <!--<span class="pickup-ribbon">PICK UP</span>-->
+          <img src="img/4971159022426_2185421a.jpg" alt="鼻呼吸が楽になる 鼻腔拡張テープ">
+        </div>
+        <div class="pickup-body">
+          <span class="pickup-badge">鼻腔拡張テープ</span>
+          <h3>鼻呼吸が楽になる 鼻腔拡張テープ〈透明タイプ〉</h3>
+          <p class="pickup-sub">いびきの軽減、睡眠中の鼻づまりに。薬剤不使用</p>
+          <p class="pickup-qty">-</p>
+        </div>
+      </a>
+
+      <a href="lp.html" class="pickup-card">
+        <div class="pickup-image">
+          <!--<span class="pickup-ribbon">PICK UP</span>-->
+          <img src="img/4987892164743_2185444a.jpg" alt="TERUMO 電子体温計〈わき専用〉">
+        </div>
+        <div class="pickup-body">
+          <span class="pickup-badge">体温計</span>
+          <h3>TERUMO 電子体温計〈わき専用〉</h3>
+          <p class="pickup-sub">予測検温で約10秒。丸ごと洗えて清潔に使えます（ET-P210WA）</p>
+          <p class="pickup-qty">-</p>
+        </div>
+      </a>
+
+      <a href="lp.html" class="pickup-card">
+        <div class="pickup-image">
+          <!--<span class="pickup-ribbon">PICK UP</span>-->
+          <img src="img/image-1786602664559.png" alt="やさしい効き目の風邪薬">
+        </div>
+        <div class="pickup-body">
+          <span class="pickup-badge">医薬品</span>
+          <h3>モリピン内服液</h3>
+          <p class="pickup-sub">1瓶（30mL）にカフェイン200mg配合＊ ＊コーヒー...</p>
+          <p class="pickup-qty">30mL×2本</p>
+        </div>
+      </a>
+
+      <a href="lp.html" class="pickup-card">
+        <div class="pickup-image">
+          <!--<span class="pickup-ribbon">PICK UP</span>-->
+          <img src="img/image-1786602664559.png" alt="うるおいなめらか 化粧水">
+        </div>
+        <div class="pickup-body">
+          <span class="pickup-badge">医薬品</span>
+          <h3>ケイヒ末［顆粒］ＧＳ</h3>
+          <p class="pickup-sub">食後血糖の上昇抑制 サプリメントではなく効果効能...</p>
+          <p class="pickup-qty">30包（10日分）</p>
+        </div>
+      </a>
+
+      <a href="lp.html" class="pickup-card">
+        <div class="pickup-image">
+          <!--<span class="pickup-ribbon">PICK UP</span>-->
+          <img src="img/image-1786602664559.png" alt="低刺激 薬用ハンドソープ">
+        </div>
+        <div class="pickup-body">
+          <span class="pickup-badge">医薬品</span>
+          <h3>ヒアルロン酸目薬ＴＥＩＫＡ</h3>
+          <p class="pickup-sub">ヒアルロン酸目薬TEIKAは、「目...</p>
+          <p class="pickup-qty">5mL×2本</p>
+        </div>
+      </a>
+
+      <a href="lp.html" class="pickup-card">
+        <div class="pickup-image">
+          <!--<span class="pickup-ribbon">PICK UP</span>-->
+          <img src="img/image-1786602664559.png" alt="毎日飲みたい 野菜ジュース">
+        </div>
+        <div class="pickup-body">
+          <span class="pickup-badge">医療衛材</span>
+          <h3>長時間クールアイスまくら 一晩ひんやりタイプ</h3>
+          <p class="pickup-sub">発熱などの寝苦...</p>
+          <p class="pickup-qty">1個</p>
+        </div>
+      </a>
+
+      <a href="lp.html" class="pickup-card">
+        <div class="pickup-image">
+          <!--<span class="pickup-ribbon">PICK UP</span>-->
+          <img src="img/image-1786602664559.png" alt="続けやすい マルチビタミン">
+        </div>
+        <div class="pickup-body">
+          <span class="pickup-badge">食品</span>
+          <h3>アイススラリー</h3>
+          <p class="pickup-sub">104kcal 凍らせて飲む 素早く冷却・塩分補給 スポーツドリンクタイプ</p>
+          <p class="pickup-qty">100g</p>
+        </div>
+      </a>
+
+      <a href="lp.html" class="pickup-card">
+        <div class="pickup-image">
+          <!--<span class="pickup-ribbon">PICK UP</span>-->
+          <img src="img/image-1786602664559.png" alt="さらさら仕上がり トリートメント">
+        </div>
+        <div class="pickup-body">
+          <span class="pickup-badge">化粧品</span>
+          <h3>さらさら仕上がり トリートメント</h3>
+          <p class="pickup-sub">Silky Smooth Treatment</p>
+          <p class="pickup-qty">400g</p>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="no-results" id="noResults">該当する商品が見つかりませんでした。キーワードを変えて再度お試しください。</div>
+
+    <div class="pagination" id="pagination"></div>
+  </div>
+</section>
+
+<footer>
+  <strong>AJD</strong>
+  &copy; ALL JAPAN DRUG Co., Ltd.
+</footer>
+
+<script>
+  const PER_PAGE = 5;
+
+  const params = new URLSearchParams(window.location.search);
+  const keyword = (params.get('q') || params.get('barcode') || '').trim();
+  const cards = Array.from(document.querySelectorAll('#resultsList .pickup-card'));
+
+  let matchedCards = cards;
+
+  if(keyword){
+    document.getElementById('resultsTitle').innerHTML = '「<span>' + keyword.replace(/[<>&]/g, '') + '</span>」の検索結果';
+    matchedCards = cards.filter(function(card){
+      return card.textContent.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
+    });
+  }
+
+  document.getElementById('resultsCount').textContent = matchedCards.length;
+  document.getElementById('noResults').style.display = matchedCards.length === 0 ? 'block' : 'none';
+
+  cards.forEach(function(card){
+    card.style.display = matchedCards.indexOf(card) === -1 ? 'none' : '';
+  });
+
+  const totalPages = Math.max(1, Math.ceil(matchedCards.length / PER_PAGE));
+  let currentPage = 1;
+
+  function showPage(page){
+    currentPage = page;
+    matchedCards.forEach(function(card, i){
+      const pageOfCard = Math.floor(i / PER_PAGE) + 1;
+      card.style.display = pageOfCard === currentPage ? '' : 'none';
+    });
+    renderPagination();
+    window.scrollTo({top: document.querySelector('.results').offsetTop - 20, behavior:'smooth'});
+  }
+
+  function renderPagination(){
+    const el = document.getElementById('pagination');
+    el.innerHTML = '';
+    if(totalPages <= 1) return;
+
+    const prev = document.createElement('button');
+    prev.type = 'button';
+    prev.textContent = '‹';
+    prev.disabled = currentPage === 1;
+    prev.addEventListener('click', function(){ showPage(currentPage - 1); });
+    el.appendChild(prev);
+
+    for(let i = 1; i <= totalPages; i++){
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = i;
+      if(i === currentPage) btn.classList.add('active');
+      btn.addEventListener('click', function(){ showPage(i); });
+      el.appendChild(btn);
+    }
+
+    const next = document.createElement('button');
+    next.type = 'button';
+    next.textContent = '›';
+    next.disabled = currentPage === totalPages;
+    next.addEventListener('click', function(){ showPage(currentPage + 1); });
+    el.appendChild(next);
+  }
+
+  showPage(1);
+</script>
+
+</body>
+</html>
