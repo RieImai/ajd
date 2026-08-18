@@ -26,7 +26,7 @@
 const SALT = '__SALT__'
 const IV   = '__IV__'
 const CT   = '__CT__'
-const SK   = 'ajd_aes_key'
+const SK   = 'ajd_pw'
 
 async function deriveKey(pw) {
   const enc = new TextEncoder()
@@ -37,11 +37,10 @@ async function deriveKey(pw) {
   )
 }
 
-async function decrypt(keyB64) {
-  const raw = Uint8Array.from(atob(keyB64), c => c.charCodeAt(0))
-  const key = await crypto.subtle.importKey('raw', raw, { name:'AES-GCM' }, false, ['decrypt'])
-  const iv  = Uint8Array.from(atob(IV), c => c.charCodeAt(0))
-  const ct  = Uint8Array.from(atob(CT), c => c.charCodeAt(0))
+// 各ページはsaltが異なるため、ページ遷移のたびにそのページのsaltで鍵を再導出する
+async function decrypt(key) {
+  const iv = Uint8Array.from(atob(IV), c => c.charCodeAt(0))
+  const ct = Uint8Array.from(atob(CT), c => c.charCodeAt(0))
   return new TextDecoder().decode(
     await crypto.subtle.decrypt({ name:'AES-GCM', iv }, key, ct)
   )
@@ -56,10 +55,8 @@ async function tryDecrypt() {
   document.getElementById('loading').style.display = 'block'
   try {
     const key = await deriveKey(pw)
-    const raw = await crypto.subtle.exportKey('raw', key)
-    const keyB64 = btoa(String.fromCharCode(...new Uint8Array(raw)))
-    await render(await decrypt(keyB64))
-    sessionStorage.setItem(SK, keyB64)
+    await render(await decrypt(key))
+    sessionStorage.setItem(SK, pw)
   } catch {
     document.getElementById('form-box').style.display = 'block'
     document.getElementById('loading').style.display = 'none'
@@ -69,13 +66,16 @@ async function tryDecrypt() {
 
 document.getElementById('pw').addEventListener('keydown', e => { if(e.key==='Enter') tryDecrypt() })
 
-// sessionStorageに鍵があれば自動復号
+// sessionStorageにパスワードがあれば自動復号（タブを閉じるまで有効）
 ;(async () => {
-  const keyB64 = sessionStorage.getItem(SK)
-  if (!keyB64) return
+  const pw = sessionStorage.getItem(SK)
+  if (!pw) return
   document.getElementById('form-box').style.display = 'none'
   document.getElementById('loading').style.display = 'block'
-  try { await render(await decrypt(keyB64)) }
+  try {
+    const key = await deriveKey(pw)
+    await render(await decrypt(key))
+  }
   catch { sessionStorage.removeItem(SK); location.reload() }
 })()
 </script>
