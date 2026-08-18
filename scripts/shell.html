@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>認証</title>
+<style>
+  body{display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;font-family:sans-serif;background:#f5f5f5}
+  .box{background:#fff;padding:32px;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.1);width:320px}
+  h2{margin:0 0 16px;font-size:1.1rem;text-align:center}
+  input{width:100%;padding:10px;border:1px solid #ddd;border-radius:4px;font-size:1rem;box-sizing:border-box}
+  button{width:100%;margin-top:12px;padding:10px;background:#333;color:#fff;border:none;border-radius:4px;font-size:1rem;cursor:pointer}
+  .error{color:#c00;font-size:.85rem;margin-top:8px;display:none}
+  #loading{display:none;text-align:center;color:#666;padding:40px}
+</style>
+</head>
+<body>
+<div class="box" id="form-box">
+  <h2>パスワードを入力してください</h2>
+  <input type="password" id="pw" placeholder="パスワード" autofocus>
+  <button onclick="tryDecrypt()">ログイン</button>
+  <p class="error" id="err">パスワードが正しくありません</p>
+</div>
+<div id="loading">読み込み中...</div>
+<script>
+const SALT = '__SALT__'
+const IV   = '__IV__'
+const CT   = '__CT__'
+const SK   = 'ajd_aes_key'
+
+async function deriveKey(pw) {
+  const enc = new TextEncoder()
+  const km = await crypto.subtle.importKey('raw', enc.encode(pw), 'PBKDF2', false, ['deriveKey'])
+  return crypto.subtle.deriveKey(
+    { name:'PBKDF2', salt:enc.encode(SALT), iterations:100000, hash:'SHA-256' },
+    km, { name:'AES-GCM', length:256 }, true, ['decrypt']
+  )
+}
+
+async function decrypt(keyB64) {
+  const raw = Uint8Array.from(atob(keyB64), c => c.charCodeAt(0))
+  const key = await crypto.subtle.importKey('raw', raw, { name:'AES-GCM' }, false, ['decrypt'])
+  const iv  = Uint8Array.from(atob(IV), c => c.charCodeAt(0))
+  const ct  = Uint8Array.from(atob(CT), c => c.charCodeAt(0))
+  return new TextDecoder().decode(
+    await crypto.subtle.decrypt({ name:'AES-GCM', iv }, key, ct)
+  )
+}
+
+async function render(html) { document.open(); document.write(html); document.close() }
+
+async function tryDecrypt() {
+  const pw = document.getElementById('pw').value
+  if (!pw) return
+  document.getElementById('form-box').style.display = 'none'
+  document.getElementById('loading').style.display = 'block'
+  try {
+    const key = await deriveKey(pw)
+    const raw = await crypto.subtle.exportKey('raw', key)
+    const keyB64 = btoa(String.fromCharCode(...new Uint8Array(raw)))
+    await render(await decrypt(keyB64))
+    sessionStorage.setItem(SK, keyB64)
+  } catch {
+    document.getElementById('form-box').style.display = 'block'
+    document.getElementById('loading').style.display = 'none'
+    document.getElementById('err').style.display = 'block'
+  }
+}
+
+document.getElementById('pw').addEventListener('keydown', e => { if(e.key==='Enter') tryDecrypt() })
+
+// sessionStorageに鍵があれば自動復号
+;(async () => {
+  const keyB64 = sessionStorage.getItem(SK)
+  if (!keyB64) return
+  document.getElementById('form-box').style.display = 'none'
+  document.getElementById('loading').style.display = 'block'
+  try { await render(await decrypt(keyB64)) }
+  catch { sessionStorage.removeItem(SK); location.reload() }
+})()
+</script>
+</body>
+</html>
