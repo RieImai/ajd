@@ -151,7 +151,7 @@
   /* ---------- SEARCH ---------- */
 
   .search-area{
-    padding:0 0 48px;
+    padding:0 0 28px;
   }
 
   .search-box{
@@ -244,12 +244,12 @@
   }
 
   .highlights{
-    padding:0 0 40px;
+    padding:0 0 48px;
   }
 
   .highlights-grid{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:1fr;
     gap:28px;
   }
 
@@ -287,7 +287,6 @@
   }
 
   .panel-head,
-  .slider,
   .pickup-list{
     position:relative;
     z-index:1;
@@ -328,129 +327,11 @@
     color:var(--gray);
   }
 
-  /* slider */
 
-  .slider{
-    position:relative;
-  }
-
-  .slider-stage{
-    position:relative;
-    max-width:500px;
-    margin:0 auto;
-  }
-
-  .slider-image{
-    position:relative;
-    aspect-ratio:1/1;
-    background:var(--white);
-    border:1px solid var(--line);
-    box-shadow:0 0 0 6px #fff, 0 0 0 7px var(--line), var(--shadow);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-  }
-
-  .slider-image a{
-    display:block;
-    width:100%;
-    height:100%;
-  }
-
-  .slider-image img{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-    padding:24px;
-  }
-
-  .slider-image .frame-hint{
-    font-size:13px;
-    color:var(--gray);
-  }
-
-  .slider-arrow{
-    position:absolute;
-    top:50%;
-    transform:translateY(-50%);
-    width:36px;height:36px;
-    border-radius:50%;
-    background:#fff;
-    border:1px solid var(--line);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:18px;
-    color:var(--navy);
-    cursor:pointer;
-    z-index:2;
-  }
-
-  .slider-arrow.prev{left:-18px;}
-  .slider-arrow.next{right:-18px;}
-
-  .slider-caption{
-    padding-top:16px;
-  }
-
-  .slider-meta{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    margin-bottom:10px;
-  }
-
-  .slider-date{
-    font-size:12px;
-    color:var(--gray);
-  }
-
-  .slider-tag{
-    font-size:12px;
-    font-weight:700;
-    background:var(--bg-soft);
-    color:var(--navy);
-    padding:4px 12px;
-    border-radius:999px;
-  }
-
-  .slider-title{
-    font-size:16px;
-    font-weight:700;
-    line-height:1.6;
-  }
-
-  .slider-desc{
-    margin-top:8px;
-    font-size:12.5px;
-    line-height:1.7;
-    color:var(--gray);
-  }
-
-  .slider-dots{
-    display:flex;
-    justify-content:center;
-    gap:8px;
-    margin-top:16px;
-  }
-
-  .slider-dots .dot{
-    width:8px;height:8px;
-    border-radius:50%;
-    background:var(--line);
-    cursor:pointer;
-  }
-
-  .slider-dots .dot.active{
-    background:var(--navy);
-  }
-
-  /* pickup */
 
   .pickup-list{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(6,1fr);
     gap:14px;
   }
 
@@ -598,8 +479,20 @@
     transform:translateY(-2px);
   }
 
+  .category-card{
+    --cat:var(--navy);
+    --cat-text:#fff;
+  }
+
+  .category-card.cat-medicine{--cat:#1E9650;}
+  .category-card.cat-hygiene{--cat:#1E6FD0;}
+  .category-card.cat-cosmetics{--cat:#E0518F;}
+  .category-card.cat-daily{--cat:#F5C400;--cat-text:#3A2F00;}
+  .category-card.cat-health{--cat:#F07818;}
+  .category-card.cat-food{--cat:#D9232E;}
+
   .category-card h3{
-    background:linear-gradient(135deg,var(--navy) 0%,var(--navy-deep) 100%);
+    background:var(--cat);
   }
 
   .category-card h3 a{
@@ -607,7 +500,7 @@
     align-items:center;
     gap:10px;
     padding:16px 18px;
-    color:#fff;
+    color:var(--cat-text);
     font-family:"Zen Maru Gothic",sans-serif;
     font-weight:700;
     font-size:15px;
@@ -615,7 +508,7 @@
 
   .category-card h3 a svg{
     width:20px;height:20px;
-    stroke:#fff;
+    stroke:var(--cat-text);
     flex:none;
   }
 
@@ -650,6 +543,48 @@
 
   /* ---------- FOOTER ---------- */
 
+  .header-nav{
+    display:flex;
+    gap:10px;
+  }
+
+  .header-nav a.nav-contact{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+
+  .header-nav a.nav-contact svg{
+    width:15px;height:15px;
+    stroke:currentColor;
+    flex:none;
+  }
+
+  .footer-contact{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:14px;
+    padding:8px 20px;
+    border:1px solid currentColor;
+    font-size:13px;
+    font-weight:700;
+  }
+
+  .footer-contact:hover{
+    opacity:.75;
+  }
+
+  .footer-contact svg{
+    width:15px;height:15px;
+    stroke:currentColor;
+    flex:none;
+  }
+
+  footer .footer-copy{
+    display:block;
+  }
+
   footer{
     background:var(--navy);
     color:#DCE3EE;
@@ -669,7 +604,7 @@
   /* ---------- RESPONSIVE ---------- */
 
   @media (max-width:960px){
-    .highlights-grid{grid-template-columns:1fr;}
+    .pickup-list{grid-template-columns:repeat(3,1fr);}
     .category-grid{grid-template-columns:repeat(2,1fr);}
   }
 
@@ -679,7 +614,7 @@
     .header-search{flex:1;}
     .header-search input{width:auto;flex:1;}
     .category-grid{grid-template-columns:1fr;}
-    .pickup-list{grid-template-columns:1fr;}
+    .pickup-list{grid-template-columns:repeat(2,1fr);}
   }
 </style>
 </head>
@@ -691,7 +626,7 @@
   <div class="wrap header-inner">
     <a class="brand" href="index.html">
       <img class="brand-logo" src="img/images.png" alt="AJD">
-      <span class="brand-tag">毎日に、ちゃんといいものを。オールジャパンドラッグのプライベートブランド</span>
+      <span class="brand-tag">毎日に、ちゃんといいものを。オールジャパンドラッグ限定取扱商品</span>
     </a>
     <div class="header-right">
       <form class="header-search" action="search-results.html" method="get">
@@ -705,6 +640,7 @@
       </form>
       <nav class="header-nav">
         <a href="#">AJDについて</a>
+        <a href="https://www.ajd.co.jp/inquiry.html" class="nav-contact" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 7 9 6 9-6"/></svg>お問い合わせ</a>
       </nav>
     </div>
   </div>
@@ -712,44 +648,40 @@
 
 <div class="highlight-band">
 
+<section class="search-area">
+  <div class="wrap">
+    <form class="search-box" action="search-results.html" method="get">
+      <div class="search-row">
+        <span class="search-label">バーコード検索</span>
+        <div class="search-field">
+          <input type="text" name="barcode" placeholder="バーコード番号を入力">
+          <button type="button" class="camera-btn" aria-label="カメラでバーコードを読み取る" onclick="alert('カメラを起動します（実装予定）');">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/>
+              <circle cx="12" cy="13.5" r="3.3"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="search-row">
+        <span class="search-label">キーワード検索</span>
+        <div class="search-field">
+          <input type="text" name="q" placeholder="商品名・カテゴリなどを入力">
+        </div>
+      </div>
+      <button type="submit" class="search-submit">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="7"/>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+        検索する
+      </button>
+    </form>
+  </div>
+</section>
+
 <section class="highlights">
   <div class="wrap highlights-grid">
-
-    <div class="panel news-panel" data-mark="NEW ITEMS">
-      <div class="panel-head">
-        <h2>新商品情報</h2>
-        <p>新発売の商品をお届け！</p>
-      </div>
-
-      <div class="slider">
-        <div class="slider-stage">
-          <button class="slider-arrow prev" aria-label="前へ" onclick="moveSlide(-1)">‹</button>
-          <div class="slider-image">
-            <a href="lp.html">
-              <img id="slideImage" src="img/image-1786602664559.png" alt="ふわふわ弾力泡の洗顔フォーム">
-            </a>
-          </div>
-          <button class="slider-arrow next" aria-label="次へ" onclick="moveSlide(1)">›</button>
-        </div>
-
-        <div class="slider-caption">
-          <div class="slider-meta">
-            <span class="slider-date" id="slideDate">2026/04/10</span>
-            <span class="slider-tag" id="slideTag">洗顔料</span>
-          </div>
-          <p class="slider-title" id="slideTitle">ふわふわ弾力泡の洗顔フォーム</p>
-          <p class="slider-desc" id="slideDesc">しっとりふんわり泡洗顔 ふわふわ しっとり 泡 ヒアルロン酸（保湿成分）コラーゲン（保湿成分）配合 ふんわり弾力泡でうるおいたっぷり泡洗顔 ふんわり弾力のある泡がうるおい残して洗い上げます。</p>
-        </div>
-
-        <div class="slider-dots" id="sliderDots">
-          <span class="dot active" onclick="goToSlide(0)"></span>
-          <span class="dot" onclick="goToSlide(1)"></span>
-          <span class="dot" onclick="goToSlide(2)"></span>
-          <span class="dot" onclick="goToSlide(3)"></span>
-          <span class="dot" onclick="goToSlide(4)"></span>
-        </div>
-      </div>
-    </div>
 
     <div class="panel pickup-panel" data-mark="PICK UP">
       <div class="panel-head">
@@ -760,7 +692,7 @@
       <div class="pickup-list">
         <a href="lp.html" class="pickup-card">
           <div class="pickup-image">
-            <!--<!--<span class="pickup-ribbon">PICK UP</span>-->-->
+            <!--<span class="pickup-ribbon">PICK UP</span>-->
             <img src="img/image-1786602664559.png" alt="やさしい効き目の風邪薬">
           </div>
           <div class="pickup-body">
@@ -841,46 +773,13 @@
   </div>
 </section>
 
-<section class="search-area">
-  <div class="wrap">
-    <form class="search-box" action="search-results.html" method="get">
-      <div class="search-row">
-        <span class="search-label">バーコード検索</span>
-        <div class="search-field">
-          <input type="text" name="barcode" placeholder="バーコード番号を入力">
-          <button type="button" class="camera-btn" aria-label="カメラでバーコードを読み取る" onclick="alert('カメラを起動します（実装予定）');">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/>
-              <circle cx="12" cy="13.5" r="3.3"/>
-            </svg>
-          </button>
-        </div>
-      </div>
-      <div class="search-row">
-        <span class="search-label">キーワード検索</span>
-        <div class="search-field">
-          <input type="text" name="q" placeholder="商品名・カテゴリなどを入力">
-        </div>
-      </div>
-      <button type="submit" class="search-submit">
-        <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="7"/>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"/>
-        </svg>
-        検索する
-      </button>
-    </form>
-  </div>
-</section>
-
 </div>
 
 <section class="categories">
   <div class="wrap">
     <h2>カテゴリーから探す</h2>
     <div class="category-grid">
-
-      <div class="category-card">
+      <div class="category-card cat-medicine">
         <h3><a href="search-results.html?q=医薬品">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
           医薬品（OTC医薬品・調剤）
@@ -888,11 +787,20 @@
         <ul>
           <li><a href="search-results.html?q=内服薬・外用薬"><strong>内服薬・外用薬</strong>風邪薬、胃腸薬、鎮痛剤、目薬</a></li>
           <li><a href="search-results.html?q=医療品・調剤"><strong>医療品・調剤</strong>処方箋に基づく調剤薬品</a></li>
+        </ul>
+      </div>
+
+      <div class="category-card cat-hygiene">
+        <h3><a href="search-results.html?q=衛生用品">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v5c0 4.5 3 8.5 7 10 4-1.5 7-5.5 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+          衛生用品
+        </a></h3>
+        <ul>
           <li><a href="search-results.html?q=衛生材料"><strong>衛生材料</strong>絆創膏、マスク、包帯</a></li>
         </ul>
       </div>
 
-      <div class="category-card">
+      <div class="category-card cat-cosmetics">
         <h3><a href="search-results.html?q=化粧品">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11Z"/></svg>
           化粧品（コスメ・スキンケア）
@@ -904,7 +812,7 @@
         </ul>
       </div>
 
-      <div class="category-card">
+      <div class="category-card cat-daily">
         <h3><a href="search-results.html?q=日用雑貨">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11 12 4l8 7"/><path d="M6 10v9h12v-9"/></svg>
           日用雑貨・トイレタリー
@@ -916,18 +824,7 @@
         </ul>
       </div>
 
-      <div class="category-card">
-        <h3><a href="search-results.html?q=食品">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h16a8 8 0 0 1-16 0Z"/><path d="M8 10V5a4 4 0 0 1 8 0v5"/></svg>
-          食品・飲料
-        </a></h3>
-        <ul>
-          <li><a href="search-results.html?q=加工食品"><strong>加工食品</strong>レトルト食品、インスタント麺、調味料</a></li>
-          <li><a href="search-results.html?q=日配品・飲料"><strong>日配品・飲料</strong>牛乳、パン、ペットボトル飲料、お菓子・スナック</a></li>
-        </ul>
-      </div>
-
-      <div class="category-card">
+      <div class="category-card cat-health">
         <h3><a href="search-results.html?q=健康食品">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21c0-9 5-15 15-15 0 10-6 15-15 15Z"/><path d="M5 21c3-3 6-6 11-11"/></svg>
           健康食品・サプリメント
@@ -938,83 +835,25 @@
         </ul>
       </div>
 
+      <div class="category-card cat-food">
+        <h3><a href="search-results.html?q=食品">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h16a8 8 0 0 1-16 0Z"/><path d="M8 10V5a4 4 0 0 1 8 0v5"/></svg>
+          食品・飲料
+        </a></h3>
+        <ul>
+          <li><a href="search-results.html?q=加工食品"><strong>加工食品</strong>レトルト食品、インスタント麺、調味料</a></li>
+          <li><a href="search-results.html?q=日配品・飲料"><strong>日配品・飲料</strong>牛乳、パン、ペットボトル飲料、お菓子・スナック</a></li>
+        </ul>
+      </div>
     </div>
   </div>
 </section>
 
 <footer>
+  <a href="https://www.ajd.co.jp/inquiry.html" class="footer-contact" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 7 9 6 9-6"/></svg>お問い合わせ</a>
   <strong>AJD</strong>
   &copy; ALL JAPAN DRUG Co., Ltd. 
 </footer>
-
-<script>
-  const slides = [
-    {
-      date:'2026/04/10', tag:'洗顔料',
-      title:'ふわふわ弾力泡の洗顔フォーム',
-      desc:'しっとりふんわり泡洗顔 ふわふわ しっとり 泡 ヒアルロン酸（保湿成分）コラーゲン（保湿成分）配合 ふんわり弾力泡でうるおいたっぷり泡洗顔 ふんわり弾力のある泡がうるおい残して洗い上げます。',
-      img:'img/image-1786602664559.png'
-    },
-    {
-      date:'2026/03/22', tag:'衣料用洗剤',
-      title:'ボールタイプの衣料用洗剤',
-      desc:'必要な分だけムダなく洗える、洗濯機にポイっと入れるだけ。洗剤・柔軟剤・香りビーズの3つの効果がこれ1つで。お試し容量7個入り（約7日分・ドラム式洗濯機OK）。',
-      img:'img/4573674009793_2193013a.jpg'
-    },
-    {
-      date:'2026/03/05', tag:'クレンジングオイル',
-      title:'ビタミンC＋酵素 クレンジングオイル',
-      desc:'3種のビタミンC誘導体（保湿成分）と3種の酵素（角質除去成分）配合。メイクや毛穴の汚れをすっきり落とすクレンジングオイルです。400mL。',
-      img:'img/4513574045026_2114153a.jpg'
-    },
-    {
-      date:'2026/02/18', tag:'鼻腔拡張テープ',
-      title:'鼻呼吸が楽になる 鼻腔拡張テープ〈透明タイプ〉',
-      desc:'いびきの軽減、睡眠中の鼻づまりに。就寝時やスポーツ時にも使える薬剤不使用の鼻腔拡張テープです。',
-      img:'img/4971159022426_2185421a.jpg'
-    },
-    {
-      date:'2026/02/01', tag:'体温計',
-      title:'TERUMO 電子体温計〈わき専用〉',
-      desc:'予測検温で約10秒ではかれる電子体温計。アルコール消毒もでき、丸ごと洗えて清潔に使えます（ET-P210WA）。',
-      img:'img/4987892164743_2185444a.jpg'
-    }
-  ];
-  let current = 0;
-
-  function render(){
-    const s = slides[current];
-    document.getElementById('slideDate').textContent = s.date;
-    document.getElementById('slideTag').textContent = s.tag;
-    document.getElementById('slideTitle').textContent = s.title;
-    document.getElementById('slideDesc').textContent = s.desc;
-    const img = document.getElementById('slideImage');
-    img.src = s.img;
-    img.alt = s.title;
-    document.querySelectorAll('#sliderDots .dot').forEach((d,i)=>{
-      d.classList.toggle('active', i === current);
-    });
-  }
-
-  function moveSlide(delta){
-    current = (current + delta + slides.length) % slides.length;
-    render();
-    resetAutoplay();
-  }
-
-  function goToSlide(i){
-    current = i;
-    render();
-    resetAutoplay();
-  }
-
-  let autoplayTimer = setInterval(function(){ moveSlide(1); }, 3000);
-
-  function resetAutoplay(){
-    clearInterval(autoplayTimer);
-    autoplayTimer = setInterval(function(){ moveSlide(1); }, 3000);
-  }
-</script>
 
 </body>
 </html>

@@ -793,6 +793,48 @@
 
   /* ---------- FOOTER ---------- */
 
+  .header-nav{
+    display:flex;
+    gap:10px;
+  }
+
+  .header-nav a.nav-contact{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+
+  .header-nav a.nav-contact svg{
+    width:15px;height:15px;
+    stroke:currentColor;
+    flex:none;
+  }
+
+  .footer-contact{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:14px;
+    padding:8px 20px;
+    border:1px solid currentColor;
+    font-size:13px;
+    font-weight:700;
+  }
+
+  .footer-contact:hover{
+    opacity:.75;
+  }
+
+  .footer-contact svg{
+    width:15px;height:15px;
+    stroke:currentColor;
+    flex:none;
+  }
+
+  footer .footer-copy{
+    display:block;
+  }
+
   footer{
     background:var(--white);
     color:var(--gray);
@@ -843,10 +885,11 @@
   <div class="wrap header-inner">
     <a class="brand" href="index.html">
       <img class="brand-logo" src="img/images.png" alt="AJD">
-      <span class="brand-tag">毎日に、ちゃんといいものを。オールジャパンドラッグのプライベートブランド</span>
+      <span class="brand-tag">毎日に、ちゃんといいものを。オールジャパンドラッグ限定取扱商品</span>
     </a>
     <nav class="header-nav">
       <a href="#">AJDについて</a>
+        <a href="https://www.ajd.co.jp/inquiry.html" class="nav-contact" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 7 9 6 9-6"/></svg>お問い合わせ</a>
     </nav>
   </div>
 </header>
@@ -1422,6 +1465,7 @@
 </section>
 
 <footer>
+  <a href="https://www.ajd.co.jp/inquiry.html" class="footer-contact" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 7 9 6 9-6"/></svg>お問い合わせ</a>
   <strong>ふわふわ弾力泡の洗顔フォーム</strong>
   内容量 160g　ヒアルロン酸・コラーゲン（保湿成分）配合
 </footer>

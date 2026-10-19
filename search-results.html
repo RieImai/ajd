@@ -353,6 +353,48 @@
 
   /* ---------- FOOTER ---------- */
 
+  .header-nav{
+    display:flex;
+    gap:10px;
+  }
+
+  .header-nav a.nav-contact{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+
+  .header-nav a.nav-contact svg{
+    width:15px;height:15px;
+    stroke:currentColor;
+    flex:none;
+  }
+
+  .footer-contact{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:14px;
+    padding:8px 20px;
+    border:1px solid currentColor;
+    font-size:13px;
+    font-weight:700;
+  }
+
+  .footer-contact:hover{
+    opacity:.75;
+  }
+
+  .footer-contact svg{
+    width:15px;height:15px;
+    stroke:currentColor;
+    flex:none;
+  }
+
+  footer .footer-copy{
+    display:block;
+  }
+
   footer{
     background:var(--navy);
     color:#DCE3EE;
@@ -392,7 +434,7 @@
   <div class="wrap header-inner">
     <a class="brand" href="index.html">
       <img class="brand-logo" src="img/images.png" alt="AJD">
-      <span class="brand-tag">毎日に、ちゃんといいものを。オールジャパンドラッグのプライベートブランド</span>
+      <span class="brand-tag">毎日に、ちゃんといいものを。オールジャパンドラッグ限定取扱商品</span>
     </a>
     <div class="header-right">
       <form class="header-search" action="search-results.html" method="get">
@@ -406,6 +448,7 @@
       </form>
       <nav class="header-nav">
         <a href="#">AJDについて</a>
+        <a href="https://www.ajd.co.jp/inquiry.html" class="nav-contact" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 7 9 6 9-6"/></svg>お問い合わせ</a>
       </nav>
     </div>
   </div>
@@ -430,6 +473,7 @@
 </section>
 
 <footer>
+  <a href="https://www.ajd.co.jp/inquiry.html" class="footer-contact" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 7 9 6 9-6"/></svg>お問い合わせ</a>
   <strong>AJD</strong>
   &copy; ALL JAPAN DRUG Co., Ltd.
 </footer>
@@ -471,11 +515,11 @@
     {name:'在宅訪問調剤サービス', badge:'医療品・調剤', sub:'ご自宅までお薬をお届け', qty:'-', img:PLACEHOLDER_IMG, cats:['医薬品','医療品・調剤']},
     {name:'オンライン服薬指導', badge:'医療品・調剤', sub:'スマホで薬剤師に相談', qty:'-', img:PLACEHOLDER_IMG, cats:['医薬品','医療品・調剤']},
 
-    {name:'鼻呼吸が楽になる 鼻腔拡張テープ〈透明タイプ〉', badge:'鼻腔拡張テープ', sub:'いびきの軽減、睡眠中の鼻づまりに。薬剤不使用', qty:'-', img:'img/4971159022426_2185421a.jpg', cats:['医薬品','衛生材料']},
-    {name:'TERUMO 電子体温計〈わき専用〉', badge:'体温計', sub:'予測検温で約10秒。丸ごと洗えて清潔に使えます（ET-P210WA）', qty:'-', img:'img/4987892164743_2185444a.jpg', cats:['医薬品','衛生材料']},
-    {name:'長時間クールアイスまくら 一晩ひんやりタイプ', badge:'医療衛材', sub:'発熱などの寝苦...', qty:'1個', img:PLACEHOLDER_IMG, cats:['医薬品','衛生材料']},
-    {name:'伸縮布絆創膏〈20枚入〉', badge:'衛生材料', sub:'動きにフィットする伸縮タイプ', qty:'20枚', img:PLACEHOLDER_IMG, cats:['医薬品','衛生材料']},
-    {name:'立体マスク ふつうサイズ〈30枚入〉', badge:'衛生材料', sub:'3層構造の立体マスク', qty:'30枚', img:PLACEHOLDER_IMG, cats:['医薬品','衛生材料']},
+    {name:'鼻呼吸が楽になる 鼻腔拡張テープ〈透明タイプ〉', badge:'鼻腔拡張テープ', sub:'いびきの軽減、睡眠中の鼻づまりに。薬剤不使用', qty:'-', img:'img/4971159022426_2185421a.jpg', cats:['衛生用品','衛生材料']},
+    {name:'TERUMO 電子体温計〈わき専用〉', badge:'体温計', sub:'予測検温で約10秒。丸ごと洗えて清潔に使えます（ET-P210WA）', qty:'-', img:'img/4987892164743_2185444a.jpg', cats:['衛生用品','衛生材料']},
+    {name:'長時間クールアイスまくら 一晩ひんやりタイプ', badge:'医療衛材', sub:'発熱などの寝苦...', qty:'1個', img:PLACEHOLDER_IMG, cats:['衛生用品','衛生材料']},
+    {name:'伸縮布絆創膏〈20枚入〉', badge:'衛生材料', sub:'動きにフィットする伸縮タイプ', qty:'20枚', img:PLACEHOLDER_IMG, cats:['衛生用品','衛生材料']},
+    {name:'立体マスク ふつうサイズ〈30枚入〉', badge:'衛生材料', sub:'3層構造の立体マスク', qty:'30枚', img:PLACEHOLDER_IMG, cats:['衛生用品','衛生材料']},
 
     {name:'ボールタイプの衣料用洗剤', badge:'衣料用洗剤', sub:'必要な分だけムダなく洗える、洗濯機にポイっと入れるだけ', qty:'7個入（約7日分）', img:'img/4573674009793_2193013a.jpg', cats:['日用雑貨','家庭用消耗品']},
     {name:'トイレットペーパー〈ダブル 4ロール〉', badge:'家庭用消耗品', sub:'やわらかタイプ', qty:'4ロール', img:PLACEHOLDER_IMG, cats:['日用雑貨','家庭用消耗品']},
