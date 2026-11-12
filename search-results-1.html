@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>検索結果 | AJD PBサイト</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Gothic:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0B1F8C;
+    --navy-deep:#081760;
+    --red:#E2001A;
+    --black:#1A1A1A;
+    --gray:#5C5C5C;
+    --white:#FFFFFF;
+    --line:#D9DCE2;
+    --bg-soft:#F1F3F8;
+    --shadow:0 2px 12px rgba(11,31,140,.07);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--white);
+    color:var(--black);
+    font-family:"Noto Sans JP",sans-serif;
+    line-height:1.7;
+  }
+
+  .brand-bar{
+    height:4px;
+    background:linear-gradient(90deg,var(--navy) 0%,var(--navy) 92%,var(--red) 92%,var(--red) 100%);
+  }
+
+  img{max-width:100%;display:block;}
+
+  a{color:inherit;text-decoration:none;}
+
+  ul{list-style:none;}
+
+  .wrap{
+    max-width:1200px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  /* ---------- HEADER ---------- */
+
+  .site-header{
+    border-bottom:1px solid var(--line);
+    background:var(--white);
+    box-shadow:var(--shadow);
+    position:sticky;
+    top:0;
+    z-index:100;
+  }
+
+  .header-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 24px;
+    gap:24px;
+  }
+
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:14px;
+  }
+
+  .brand-logo{
+    height:40px;
+    width:auto;
+  }
+
+  .brand-tag{
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:700;
+    font-size:15px;
+    color:var(--navy);
+    letter-spacing:.04em;
+    border-left:1px solid var(--line);
+    padding-left:14px;
+  }
+
+  .header-right{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+
+  .header-search{
+    display:flex;
+    align-items:stretch;
+    border:1px solid var(--line);
+  }
+
+  .header-search input{
+    border:none;
+    outline:none;
+    padding:8px 12px;
+    width:180px;
+    font-size:13px;
+    font-family:inherit;
+    color:var(--black);
+  }
+
+  .header-search input::placeholder{
+    color:#9AA0AA;
+  }
+
+  .header-search button{
+    flex:none;
+    width:38px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--navy);
+    border:none;
+    cursor:pointer;
+  }
+
+  .header-search button:hover{
+    background:var(--navy-deep);
+  }
+
+  .header-search button svg{
+    width:15px;height:15px;
+    stroke:#fff;
+  }
+
+  .header-nav a{
+    font-size:14px;
+    font-weight:700;
+    color:var(--navy);
+    padding:10px 18px;
+    border:1px solid var(--navy);
+    white-space:nowrap;
+  }
+
+  .header-nav a:hover{
+    background:var(--navy);
+    color:#fff;
+  }
+
+  /* ---------- RESULTS HEAD ---------- */
+
+  .results-head{
+    background:
+      radial-gradient(circle at 12% 8%, rgba(11,31,140,.06), transparent 40%),
+      radial-gradient(circle at 88% 92%, rgba(226,0,26,.05), transparent 40%),
+      var(--bg-soft);
+    padding:40px 0;
+  }
+
+  .results-eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:.08em;
+    color:var(--navy);
+  }
+
+  .results-eyebrow::before{
+    content:"";
+    width:16px;height:16px;
+    background:var(--navy);
+    flex:none;
+  }
+
+  .results-head h1{
+    margin-top:14px;
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-weight:900;
+    font-size:24px;
+    color:var(--black);
+  }
+
+  .results-head h1 span{
+    color:var(--navy);
+  }
+
+  .results-count{
+    margin-top:10px;
+    font-size:13px;
+    color:var(--gray);
+  }
+
+  .results-count strong{
+    color:var(--black);
+    font-size:15px;
+  }
+
+  /* ---------- RESULTS GRID ---------- */
+
+  .results{
+    padding:48px 0 72px;
+  }
+
+  .pickup-list{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:16px;
+  }
+
+  .pickup-card{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    border:1px solid var(--line);
+    background:var(--white);
+    padding:10px;
+    transition:box-shadow .15s ease, transform .15s ease;
+  }
+
+  .pickup-card:hover{
+    box-shadow:0 8px 20px rgba(11,31,140,.14);
+    transform:translateY(-2px);
+  }
+
+  .pickup-image{
+    position:relative;
+    aspect-ratio:1/1;
+    border:1px solid var(--line);
+    background:var(--white);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+
+  .pickup-image img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    padding:12px;
+  }
+
+  .pickup-ribbon{
+    position:absolute;
+    top:8px;
+    left:-2px;
+    background:var(--red);
+    color:#fff;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:.06em;
+    padding:3px 10px 3px 10px;
+    box-shadow:1px 2px 0 rgba(0,0,0,.1);
+    z-index:2;
+  }
+
+  .pickup-ribbon::before{
+    content:"";
+    position:absolute;
+    left:0;
+    bottom:-5px;
+    border-width:5px 5px 0 0;
+    border-style:solid;
+    border-color:#8f0011 transparent transparent transparent;
+  }
+
+  .pickup-body{
+    padding:12px 4px 4px;
+  }
+
+  .pickup-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-size:10.5px;
+    font-weight:700;
+    background:var(--bg-soft);
+    color:var(--navy);
+    padding:4px 10px;
+    margin-bottom:8px;
+  }
+
+  .pickup-badge::before{
+    content:"";
+    width:5px;height:5px;
+    background:var(--navy);
+    flex:none;
+  }
+
+  .pickup-body h3{
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-size:13.5px;
+    font-weight:900;
+    line-height:1.5;
+  }
+
+  .pickup-sub{
+    margin-top:8px;
+    font-size:11px;
+    font-weight:700;
+    color:var(--black);
+  }
+
+  .pickup-qty{
+    margin-top:4px;
+    font-size:11px;
+    color:var(--gray);
+  }
+
+  .no-results{
+    display:none;
+    padding:48px 24px;
+    text-align:center;
+    color:var(--gray);
+    font-size:14px;
+    border:1px solid var(--line);
+  }
+
+  .pagination{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:32px;
+  }
+
+  .pagination button{
+    min-width:38px;
+    height:38px;
+    padding:0 10px;
+    font-size:13px;
+    font-weight:700;
+    font-family:inherit;
+    background:var(--white);
+    color:var(--navy);
+    border:1px solid var(--line);
+    cursor:pointer;
+  }
+
+  .pagination button.active{
+    background:var(--navy);
+    border-color:var(--navy);
+    color:#fff;
+  }
+
+  .pagination button:disabled{
+    color:#B9BDC7;
+    cursor:default;
+  }
+
+  /* ---------- FOOTER ---------- */
+
+  .header-nav{
+    display:flex;
+    gap:10px;
+  }
+
+  .footer-contact{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:14px;
+    padding:8px 20px;
+    border:1px solid currentColor;
+    font-size:13px;
+    font-weight:700;
+  }
+
+  .footer-contact:hover{
+    opacity:.75;
+  }
+
+  .footer-contact svg{
+    width:15px;height:15px;
+    stroke:currentColor;
+    flex:none;
+  }
+
+  footer .footer-copy{
+    display:block;
+  }
+
+  footer{
+    background:var(--navy);
+    color:#DCE3EE;
+    padding:36px 0;
+    text-align:center;
+    font-size:13px;
+  }
+
+  footer strong{
+    display:block;
+    font-family:"Zen Maru Gothic",sans-serif;
+    font-size:16px;
+    margin-bottom:8px;
+    color:#fff;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+
+  @media (max-width:1100px){
+    .pickup-list{grid-template-columns:repeat(4,1fr);}
+  }
+
+  @media (max-width:960px){
+    .pickup-list{grid-template-columns:repeat(3,1fr);}
+  }
+
+  @media (max-width:760px){
+    .pickup-list{grid-template-columns:repeat(2,1fr);}
+  }
+
+  @media (max-width:640px){
+    .header-inner{flex-direction:column;align-items:flex-start;gap:14px;}
+    .header-right{width:100%;justify-content:space-between;}
+    .header-search{flex:1;}
+    .header-search input{width:auto;flex:1;}
+    .pickup-list{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="brand-bar"></div>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">
+      <img class="brand-logo" src="img/images.png" alt="AJD">
+      <span class="brand-tag">毎日に、ちゃんといいものを。オールジャパンドラッグ限定取扱商品</span>
+    </a>
+    <div class="header-right">
+      <form class="header-search" action="search-results-1.html" method="get">
+        <input type="text" name="q" placeholder="キーワード検索">
+        <button type="submit" aria-label="検索">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="7"/>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+          </svg>
+        </button>
+      </form>
+      <nav class="header-nav">
+        <a href="#">AJDについて</a>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<section class="results-head">
+  <div class="wrap">
+    <span class="results-eyebrow">＜検索結果＞</span>
+    <h1 id="resultsTitle">商品を検索</h1>
+    <p class="results-count"><strong id="resultsCount">-</strong> 件の商品が見つかりました</p>
+  </div>
+</section>
+
+<section class="results">
+  <div class="wrap">
+    <div class="pickup-list" id="resultsList"></div>
+
+    <div class="no-results" id="noResults">該当する商品が見つかりませんでした。キーワードを変えて再度お試しください。</div>
+
+    <div class="pagination" id="pagination"></div>
+  </div>
+</section>
+
+<footer>
+  <a href="https://www.ajd.co.jp/inquiry.html" class="footer-contact" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="1"/><path d="m3 7 9 6 9-6"/></svg>お問い合わせ</a>
+  <strong>AJD</strong>
+  &copy; ALL JAPAN DRUG Co., Ltd.
+</footer>
+
+<script>
+  const PER_PAGE = 18;
+  const SHOW_COUNT = 1; // このページで表示する件数（固定）
+  const PLACEHOLDER_IMG = 'img/image-1786602664559.png';
+
+  // cats: [主カテゴリー, サブカテゴリー] — カテゴリーページ（index.html）の
+  // href="search-results-24.html?q=..." と完全一致させて絞り込みに使う
+  const products = [
+    {name:'ふわふわ弾力泡の洗顔フォーム', badge:'洗顔料', sub:'ヒアルロン酸・コラーゲン（保湿成分）配合 ふんわり弾力泡でうるおいたっぷり泡洗顔', qty:'160g', img:PLACEHOLDER_IMG, cats:['化粧品','基礎化粧品']},
+    {name:'保湿化粧水〈さっぱりタイプ〉', badge:'基礎化粧品', sub:'みずみずしい使用感の化粧水', qty:'200mL', img:PLACEHOLDER_IMG, cats:['化粧品','基礎化粧品']},
+    {name:'うるおい乳液', badge:'基礎化粧品', sub:'肌になじむしっとり乳液', qty:'130mL', img:PLACEHOLDER_IMG, cats:['化粧品','基礎化粧品']},
+    {name:'ビタミンC＋酵素 クレンジングオイル', badge:'クレンジングオイル', sub:'3種のビタミンC誘導体＋3種の酵素配合のクレンジングオイル', qty:'400mL', img:'img/4513574045026_2114153a.jpg', cats:['化粧品','基礎化粧品']},
+    {name:'コラーゲン配合美容液', badge:'基礎化粧品', sub:'肌にハリを与える美容液', qty:'30mL', img:PLACEHOLDER_IMG, cats:['化粧品','基礎化粧品']},
+
+    {name:'落ちにくいリップティント', badge:'メイクアップ', sub:'色持ちの良いティントタイプ', qty:'5g', img:PLACEHOLDER_IMG, cats:['化粧品','メイクアップ']},
+    {name:'カバー力ファンデーション〈パウダー〉', badge:'メイクアップ', sub:'しっかりカバーのパウダーファンデーション', qty:'9g', img:PLACEHOLDER_IMG, cats:['化粧品','メイクアップ']},
+    {name:'にじみにくいアイライナー', badge:'メイクアップ', sub:'汗・水に強いリキッドタイプ', qty:'0.5mL', img:PLACEHOLDER_IMG, cats:['化粧品','メイクアップ']},
+    {name:'眉ペンシル〈ナチュラルブラウン〉', badge:'メイクアップ', sub:'描きやすい極細芯', qty:'-', img:PLACEHOLDER_IMG, cats:['化粧品','メイクアップ']},
+    {name:'チーク〈ふんわりピーチ〉', badge:'メイクアップ', sub:'ふんわり発色のパウダーチーク', qty:'-', img:PLACEHOLDER_IMG, cats:['化粧品','メイクアップ']},
+
+    {name:'さらさら仕上がり トリートメント', badge:'化粧品', sub:'Silky Smooth Treatment', qty:'400g', img:PLACEHOLDER_IMG, cats:['化粧品','ヘアケア']},
+    {name:'アミノ酸系シャンプー', badge:'ヘアケア', sub:'洗浄力とやさしさを両立', qty:'400mL', img:PLACEHOLDER_IMG, cats:['化粧品','ヘアケア']},
+    {name:'洗い流さないヘアオイル', badge:'ヘアケア', sub:'毛先までまとまる艶髪オイル', qty:'60mL', img:PLACEHOLDER_IMG, cats:['化粧品','ヘアケア']},
+    {name:'ボリュームアップ スタイリング剤', badge:'ヘアケア', sub:'根元からふんわり仕上げ', qty:'150g', img:PLACEHOLDER_IMG, cats:['化粧品','ヘアケア']},
+    {name:'頭皮ケア スカルプシャンプー', badge:'ヘアケア', sub:'頭皮環境を整えるシャンプー', qty:'350mL', img:PLACEHOLDER_IMG, cats:['化粧品','ヘアケア']},
+
+    {name:'モリピン内服液', badge:'医薬品', sub:'1瓶（30mL）にカフェイン200mg配合＊ ＊コーヒー...', qty:'30mL×2本', img:PLACEHOLDER_IMG, cats:['医薬品','内服薬・外用薬']},
+    {name:'ケイヒ末［顆粒］ＧＳ', badge:'医薬品', sub:'食後血糖の上昇抑制 サプリメントではなく効果効能...', qty:'30包（10日分）', img:PLACEHOLDER_IMG, cats:['医薬品','内服薬・外用薬']},
+    {name:'ヒアルロン酸目薬ＴＥＩＫＡ', badge:'医薬品', sub:'ヒアルロン酸目薬TEIKAは、「目...', qty:'5mL×2本', img:PLACEHOLDER_IMG, cats:['医薬品','内服薬・外用薬']},
+    {name:'新セキトメ錠〈せき止め〉', badge:'医薬品', sub:'錠剤タイプの鎮咳薬', qty:'24錠', img:PLACEHOLDER_IMG, cats:['医薬品','内服薬・外用薬']},
+    {name:'胃腸薬プラス〈顆粒〉', badge:'医薬品', sub:'食べ過ぎ・胃もたれに', qty:'16包', img:PLACEHOLDER_IMG, cats:['医薬品','内服薬・外用薬']},
+
+    {name:'処方箋調剤サービス', badge:'医療品・調剤', sub:'処方箋に基づく調剤を承ります', qty:'-', img:PLACEHOLDER_IMG, cats:['医薬品','医療品・調剤']},
+    {name:'お薬手帳管理サポート', badge:'医療品・調剤', sub:'服薬状況の記録・確認をサポート', qty:'-', img:PLACEHOLDER_IMG, cats:['医薬品','医療品・調剤']},
+    {name:'ジェネリック医薬品切替相談', badge:'医療品・調剤', sub:'薬剤師によるご相談窓口', qty:'-', img:PLACEHOLDER_IMG, cats:['医薬品','医療品・調剤']},
+    {name:'在宅訪問調剤サービス', badge:'医療品・調剤', sub:'ご自宅までお薬をお届け', qty:'-', img:PLACEHOLDER_IMG, cats:['医薬品','医療品・調剤']},
+    {name:'オンライン服薬指導', badge:'医療品・調剤', sub:'スマホで薬剤師に相談', qty:'-', img:PLACEHOLDER_IMG, cats:['医薬品','医療品・調剤']},
+
+    {name:'鼻呼吸が楽になる 鼻腔拡張テープ〈透明タイプ〉', badge:'鼻腔拡張テープ', sub:'いびきの軽減、睡眠中の鼻づまりに。薬剤不使用', qty:'-', img:'img/4971159022426_2185421a.jpg', cats:['衛生用品','衛生材料']},
+    {name:'TERUMO 電子体温計〈わき専用〉', badge:'体温計', sub:'予測検温で約10秒。丸ごと洗えて清潔に使えます（ET-P210WA）', qty:'-', img:'img/4987892164743_2185444a.jpg', cats:['衛生用品','衛生材料']},
+    {name:'長時間クールアイスまくら 一晩ひんやりタイプ', badge:'医療衛材', sub:'発熱などの寝苦...', qty:'1個', img:PLACEHOLDER_IMG, cats:['衛生用品','衛生材料']},
+    {name:'伸縮布絆創膏〈20枚入〉', badge:'衛生材料', sub:'動きにフィットする伸縮タイプ', qty:'20枚', img:PLACEHOLDER_IMG, cats:['衛生用品','衛生材料']},
+    {name:'立体マスク ふつうサイズ〈30枚入〉', badge:'衛生材料', sub:'3層構造の立体マスク', qty:'30枚', img:PLACEHOLDER_IMG, cats:['衛生用品','衛生材料']},
+
+    {name:'ボールタイプの衣料用洗剤', badge:'衣料用洗剤', sub:'必要な分だけムダなく洗える、洗濯機にポイっと入れるだけ', qty:'7個入（約7日分）', img:'img/4573674009793_2193013a.jpg', cats:['日用雑貨','家庭用消耗品']},
+    {name:'トイレットペーパー〈ダブル 4ロール〉', badge:'家庭用消耗品', sub:'やわらかタイプ', qty:'4ロール', img:PLACEHOLDER_IMG, cats:['日用雑貨','家庭用消耗品']},
+    {name:'ボックスティッシュ〈5個パック〉', badge:'家庭用消耗品', sub:'保湿タイプ', qty:'5箱', img:PLACEHOLDER_IMG, cats:['日用雑貨','家庭用消耗品']},
+    {name:'食器用洗剤〈詰め替え用〉', badge:'家庭用消耗品', sub:'油汚れをすっきり落とす', qty:'700mL', img:PLACEHOLDER_IMG, cats:['日用雑貨','家庭用消耗品']},
+    {name:'抗菌 台所用スポンジ', badge:'家庭用消耗品', sub:'泡立ちの良いキッチンスポンジ', qty:'3個', img:PLACEHOLDER_IMG, cats:['日用雑貨','家庭用消耗品']},
+
+    {name:'やわらかめ歯ブラシ〈ふつう〉', badge:'オーラルケア', sub:'歯ぐきにやさしい設計', qty:'1本', img:PLACEHOLDER_IMG, cats:['日用雑貨','オーラルケア']},
+    {name:'フッ素配合 歯みがき粉', badge:'オーラルケア', sub:'さわやかなミント味', qty:'140g', img:PLACEHOLDER_IMG, cats:['日用雑貨','オーラルケア']},
+    {name:'マウスウォッシュ〈ノンアルコール〉', badge:'オーラルケア', sub:'低刺激タイプ', qty:'460mL', img:PLACEHOLDER_IMG, cats:['日用雑貨','オーラルケア']},
+    {name:'デンタルフロス〈40m〉', badge:'オーラルケア', sub:'歯間ケアに', qty:'1個', img:PLACEHOLDER_IMG, cats:['日用雑貨','オーラルケア']},
+    {name:'舌クリーナー', badge:'オーラルケア', sub:'やさしく舌苔をオフ', qty:'1本', img:PLACEHOLDER_IMG, cats:['日用雑貨','オーラルケア']},
+
+    {name:'置き型消臭剤〈無香料〉', badge:'芳香・消臭剤', sub:'お部屋のニオイをケア', qty:'400g', img:PLACEHOLDER_IMG, cats:['日用雑貨','芳香・消臭剤']},
+    {name:'玄関用 アロマディフューザー', badge:'芳香・消臭剤', sub:'ほのかに香る玄関用', qty:'1個', img:PLACEHOLDER_IMG, cats:['日用雑貨','芳香・消臭剤']},
+    {name:'クローゼット用防虫剤〈1年用〉', badge:'芳香・消臭剤', sub:'衣類を虫から守る', qty:'3個', img:PLACEHOLDER_IMG, cats:['日用雑貨','芳香・消臭剤']},
+    {name:'スプレー消臭剤〈ファブリック用〉', badge:'芳香・消臭剤', sub:'布製品にサッとひと吹き', qty:'300mL', img:PLACEHOLDER_IMG, cats:['日用雑貨','芳香・消臭剤']},
+    {name:'車用芳香剤〈クリップタイプ〉', badge:'芳香・消臭剤', sub:'エアコン吹き出し口に装着', qty:'1個', img:PLACEHOLDER_IMG, cats:['日用雑貨','芳香・消臭剤']},
+
+    {name:'レトルトカレー〈中辛〉', badge:'加工食品', sub:'温めるだけの本格カレー', qty:'200g', img:PLACEHOLDER_IMG, cats:['食品','加工食品']},
+    {name:'カップ麺〈しょうゆ味〉', badge:'加工食品', sub:'お湯を注ぐだけ', qty:'1個', img:PLACEHOLDER_IMG, cats:['食品','加工食品']},
+    {name:'減塩みそ', badge:'加工食品', sub:'塩分控えめの合わせみそ', qty:'400g', img:PLACEHOLDER_IMG, cats:['食品','加工食品']},
+    {name:'だし醤油', badge:'加工食品', sub:'料理の味を引き立てる', qty:'500mL', img:PLACEHOLDER_IMG, cats:['食品','加工食品']},
+    {name:'パックご飯〈200g×3〉', badge:'加工食品', sub:'レンジで手軽に', qty:'3パック', img:PLACEHOLDER_IMG, cats:['食品','加工食品']},
+
+    {name:'アイススラリー', badge:'食品', sub:'104kcal 凍らせて飲む 素早く冷却・塩分補給 スポーツドリンクタイプ', qty:'100g', img:PLACEHOLDER_IMG, cats:['食品','日配品・飲料']},
+    {name:'低脂肪牛乳〈1000mL〉', badge:'日配品・飲料', sub:'すっきり飲みやすい', qty:'1000mL', img:PLACEHOLDER_IMG, cats:['食品','日配品・飲料']},
+    {name:'食パン〈6枚切〉', badge:'日配品・飲料', sub:'ふんわり食感', qty:'1斤', img:PLACEHOLDER_IMG, cats:['食品','日配品・飲料']},
+    {name:'ミネラルウォーター〈2L〉', badge:'日配品・飲料', sub:'軟水でやさしい飲み心地', qty:'2L', img:PLACEHOLDER_IMG, cats:['食品','日配品・飲料']},
+    {name:'スナック菓子〈うすしお味〉', badge:'日配品・飲料', sub:'サクサク食感', qty:'60g', img:PLACEHOLDER_IMG, cats:['食品','日配品・飲料']},
+
+    {name:'マルチビタミン〈30日分〉', badge:'サプリメント', sub:'毎日の栄養補給に', qty:'30粒', img:PLACEHOLDER_IMG, cats:['健康食品','サプリメント']},
+    {name:'カルシウム＋ビタミンD', badge:'サプリメント', sub:'骨の健康をサポート', qty:'60粒', img:PLACEHOLDER_IMG, cats:['健康食品','サプリメント']},
+    {name:'鉄分・葉酸サプリ', badge:'サプリメント', sub:'女性にうれしい成分配合', qty:'60粒', img:PLACEHOLDER_IMG, cats:['健康食品','サプリメント']},
+    {name:'コンドロイチン＋グルコサミン', badge:'サプリメント', sub:'毎日の歩みをサポート', qty:'90粒', img:PLACEHOLDER_IMG, cats:['健康食品','サプリメント']},
+    {name:'乳酸菌サプリメント', badge:'サプリメント', sub:'おなかの環境をサポート', qty:'30粒', img:PLACEHOLDER_IMG, cats:['健康食品','サプリメント']},
+
+    {name:'滋養強壮ドリンク', badge:'健康ドリンク', sub:'元気をサポートする栄養ドリンク', qty:'100mL×3本', img:PLACEHOLDER_IMG, cats:['健康食品','健康ドリンク']},
+    {name:'健康茶〈ブレンド〉', badge:'健康ドリンク', sub:'毎日飲みやすいブレンド茶', qty:'20袋', img:PLACEHOLDER_IMG, cats:['健康食品','健康ドリンク']},
+    {name:'難消化性デキストリン飲料', badge:'健康ドリンク', sub:'食物繊維をプラス', qty:'500mL', img:PLACEHOLDER_IMG, cats:['健康食品','健康ドリンク']},
+    {name:'コラーゲンドリンク', badge:'健康ドリンク', sub:'美容習慣にプラス1本', qty:'50mL×10本', img:PLACEHOLDER_IMG, cats:['健康食品','健康ドリンク']},
+    {name:'炭酸水〈プレーン〉', badge:'健康ドリンク', sub:'すっきりとした飲みごたえ', qty:'500mL', img:PLACEHOLDER_IMG, cats:['健康食品','健康ドリンク']}
+  ];
+
+  const resultsList = document.getElementById('resultsList');
+
+  products.forEach(function(p){
+    const a = document.createElement('a');
+    a.href = 'lp.html';
+    a.className = 'pickup-card';
+    a.dataset.cats = p.cats.join(',');
+    a.innerHTML =
+      '<div class="pickup-image"><img src="' + p.img + '" alt="' + p.name + '"></div>' +
+      '<div class="pickup-body">' +
+        '<span class="pickup-badge">' + p.badge + '</span>' +
+        '<h3>' + p.name + '</h3>' +
+        '<p class="pickup-sub">' + p.sub + '</p>' +
+        '<p class="pickup-qty">' + p.qty + '</p>' +
+      '</div>';
+    resultsList.appendChild(a);
+  });
+
+  const cards = Array.from(document.querySelectorAll('#resultsList .pickup-card'));
+
+  const params = new URLSearchParams(window.location.search);
+  const keyword = (params.get('q') || params.get('barcode') || '').trim();
+
+  // 表示件数固定ページ：検索語・カテゴリーに関係なく先頭から SHOW_COUNT 件を表示
+  const matchedCards = cards.slice(0, SHOW_COUNT);
+
+  if(keyword){
+    document.getElementById('resultsTitle').innerHTML = '「<span>' + keyword.replace(/[<>&]/g, '') + '</span>」の検索結果';
+  }
+
+  document.getElementById('resultsCount').textContent = matchedCards.length;
+  document.getElementById('noResults').style.display = matchedCards.length === 0 ? 'block' : 'none';
+
+  const totalPages = Math.max(1, Math.ceil(matchedCards.length / PER_PAGE));
+  let currentPage = 1;
+
+  function showPage(page){
+    currentPage = page;
+    cards.forEach(function(card){ card.style.display = 'none'; });
+    matchedCards.forEach(function(card, i){
+      const pageOfCard = Math.floor(i / PER_PAGE) + 1;
+      card.style.display = pageOfCard === currentPage ? '' : 'none';
+    });
+    renderPagination();
+    window.scrollTo({top: document.querySelector('.results').offsetTop - 20, behavior:'smooth'});
+  }
+
+  function renderPagination(){
+    const el = document.getElementById('pagination');
+    el.innerHTML = '';
+    if(totalPages <= 1) return;
+
+    const prev = document.createElement('button');
+    prev.type = 'button';
+    prev.textContent = '‹';
+    prev.disabled = currentPage === 1;
+    prev.addEventListener('click', function(){ showPage(currentPage - 1); });
+    el.appendChild(prev);
+
+    for(let i = 1; i <= totalPages; i++){
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = i;
+      if(i === currentPage) btn.classList.add('active');
+      btn.addEventListener('click', function(){ showPage(i); });
+      el.appendChild(btn);
+    }
+
+    const next = document.createElement('button');
+    next.type = 'button';
+    next.textContent = '›';
+    next.disabled = currentPage === totalPages;
+    next.addEventListener('click', function(){ showPage(currentPage + 1); });
+    el.appendChild(next);
+  }
+
+  showPage(1);
+</script>
+
+</body>
+</html>
